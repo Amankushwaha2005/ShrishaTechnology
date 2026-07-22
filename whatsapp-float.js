@@ -7,7 +7,7 @@
  */
 
 (function () {
-  const PHONE = "919528252099";
+  const PHONE = "917817085910";
   const TEXT = "Hi #TechWithAman, I would like to discuss a project.";
   const VERSION = "2";
 

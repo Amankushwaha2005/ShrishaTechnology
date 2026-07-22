@@ -7,7 +7,7 @@
  */
 
 (function () {
-  const WA_PHONE = "919528252099";
+  const WA_PHONE = "917817085910";
   const WA_URL = `https://wa.me/${WA_PHONE}?text=`;
   const BRAND = "#TechWithAman";
 
@@ -27,14 +27,14 @@
     student:
       "Student projects include code, documentation, PPT tips & viva guidance — delivered on your deadline. Share your topic on WhatsApp for a budget-friendly quote.",
     contact:
-      "Share your name, project type & deadline — we usually reply within a few hours. Email: hello@techwithaman.com | Call/WhatsApp: +91 95282 52099",
+      "Share your name, project type & deadline — we usually reply within a few hours. Email: mayankklush2006@gmail.com | Call/WhatsApp: +91 78170 85910",
     whatsapp: null,
     default:
       "Thanks for your message! For a detailed reply, tap “Send on WhatsApp” below or ask about pricing, services, or student projects.",
   };
 
   const SAVED_HINT =
-    "Message admin panel me save ho gaya. WhatsApp par lane ke liye neeche “Send on WhatsApp” dabao — WhatsApp me Send press karne ke baad aapke phone (+91 95282 52099) par dikhega.";
+    "Message admin panel me save ho gaya. WhatsApp par lane ke liye neeche “Send on WhatsApp” dabao — WhatsApp me Send press karne ke baad aapke phone (+91 78170 85910) par dikhega.";
 
   let chatbotEl;
   let messagesEl;

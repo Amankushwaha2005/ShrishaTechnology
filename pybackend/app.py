@@ -43,7 +43,17 @@ def create_app() -> Flask:
     app.config["SETTINGS"] = settings
 
     # Ensure PostgreSQL schema exists on boot (same behavior as legacy Node backend).
-    init_db()
+    try:
+        init_db()
+        app.config["DB_AVAILABLE"] = True
+    except Exception as exc:
+        if settings.is_production:
+            raise
+        app.config["DB_AVAILABLE"] = False
+        app.logger.warning(
+            "PostgreSQL unavailable — pages will load but login/forms/payments are disabled. (%s)",
+            exc,
+        )
 
     oauth = OAuth(app)
     app.extensions["oauth"] = oauth

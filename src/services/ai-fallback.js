@@ -58,7 +58,7 @@ function replyForIntent(primary, combined, message) {
     case "greeting":
       return "Namaste! Main #TechWithAman ka assistant hoon. Aap website, app, logo ya student project ke baare me Hindi/English dono me pooch sakte ho — main samajh kar jawab dunga.";
     case "thanks":
-      return "Welcome! Aur koi sawal ho to poochiye — ya WhatsApp +91 95282 52099 par direct team se baat kar sakte ho.";
+      return "Welcome! Aur koi sawal ho to poochiye — ya WhatsApp +91 78170 85910 par direct team se baat kar sakte ho.";
     case "pricing":
       if (/app/.test(combined)) {
         return "App development packages /pricing#app-development par — usually ₹9,999 se upar idea par depend. Short idea WhatsApp par bhejo.";
@@ -66,13 +66,13 @@ function replyForIntent(primary, combined, message) {
       if (/logo/.test(combined)) {
         return "Logo design ~₹1,499 se shuru — concepts + vector files. /pricing#logo-design";
       }
-      return "Website: Starter ~₹2,999 (1 page), Professional ~₹7,999 (5 pages), Premium/CMS ~₹12,999. Exact quote budget + pages batane par. /pricing ya WhatsApp +91 95282 52099.";
+      return "Website: Starter ~₹2,999 (1 page), Professional ~₹7,999 (5 pages), Premium/CMS ~₹12,999. Exact quote budget + pages batane par. /pricing ya WhatsApp +91 78170 85910.";
     case "website_build":
       return "Website ke liye 3 cheezein batayein: (1) business type — shop/coaching/portfolio? (2) kitne pages? (3) kab tak chahiye? Starter ₹2,999 se 1-page site possible hai. Details milte hi exact plan bata sakte hain.";
     case "ecommerce":
       return "Online shop / payment ke liye Professional ya Premium package better hota hai. Products count, payment method (UPI/Razorpay) aur timeline batayein — hum custom quote denge.";
     case "app":
-      return "App chahiye to batayein: Android only ya Android+iOS? Login chahiye? Play Store publish? MVP idea likh kar WhatsApp +91 95282 52099 par bhejo — package suggest karenge.";
+      return "App chahiye to batayein: Android only ya Android+iOS? Login chahiye? Play Store publish? MVP idea likh kar WhatsApp +91 78170 85910 par bhejo — package suggest karenge.";
     case "logo":
       return "Logo ke liye brand name, colours pasand, aur kahan use hoga (shop/social) batayein. ~₹1,499 se concepts milte hain. 2–3 din me first draft possible (load par depend).";
     case "student":
@@ -86,7 +86,7 @@ function replyForIntent(primary, combined, message) {
       }
       return "Simple website: often 5–10 working days. 5+ pages / custom features: 2–4 weeks. Aapki deadline batao — hum honest timeline denge.";
     case "contact":
-      return "Direct baat: WhatsApp/call **+91 95282 52099**, email **hello@techwithaman.com**, ya site par **/contact** form. Usually kuch hours me reply.";
+      return "Direct baat: WhatsApp/call **+91 78170 85910**, email **mayankklush2006@gmail.com**, ya site par **/contact** form. Usually kuch hours me reply.";
     case "payment":
       return "Generally advance to start, milestones for bigger projects. Refund policy footer/terms me — exact plan WhatsApp par discuss hota hai.";
     case "portfolio":
@@ -94,7 +94,7 @@ function replyForIntent(primary, combined, message) {
     case "compare":
       return "Starter = 1 page, jaldi & budget. Professional = 5 pages, business email, zyada professional. Premium = CMS, blog, zyada control. Aapka goal batayein — recommend kar denge.";
     case "yes":
-      return "Great! Agla step: project type + budget + deadline likh kar WhatsApp +91 95282 52099 par bhejo, ya /contact form bharo. Team follow-up karegi.";
+      return "Great! Agla step: project type + budget + deadline likh kar WhatsApp +91 78170 85910 par bhejo, ya /contact form bharo. Team follow-up karegi.";
     case "no":
       return "Koi baat nahi — jab ready ho tab message karna. /pricing aur /services browse kar sakte ho.";
     default:
@@ -138,7 +138,7 @@ function fallbackReply(message, history = []) {
     }
   }
 
-  return `Main ${SITE_KNOWLEDGE.split("\n")[0]} ke baare me help karta hoon. Thoda clear likho — jaise "coaching website 5 page kitne me" ya "Android app cost" — ya WhatsApp +91 95282 52099 par baat karo.`;
+  return `Main ${SITE_KNOWLEDGE.split("\n")[0]} ke baare me help karta hoon. Thoda clear likho — jaise "coaching website 5 page kitne me" ya "Android app cost" — ya WhatsApp +91 78170 85910 par baat karo.`;
 }
 
 module.exports = { fallbackReply, normalize, scoreIntents };

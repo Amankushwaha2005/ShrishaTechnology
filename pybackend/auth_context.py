@@ -14,8 +14,14 @@ def refresh_session_user() -> dict | None:
         session.pop("user", None)
         return None
 
+    if not current_app.config.get("DB_AVAILABLE", True):
+        return None
+
     settings = current_app.config["SETTINGS"]
-    user = query_one(_USER_SQL, (user_id,))
+    try:
+        user = query_one(_USER_SQL, (user_id,))
+    except Exception:
+        return None
     user = sync_admin_role(user, settings.admin_emails)
     if user:
         session["user"] = user

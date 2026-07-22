@@ -124,7 +124,7 @@
       (publicId ? "\n• Order ref: " + publicId : "") +
       (payload.notes ? "\n• Notes: " + payload.notes : "");
     return (
-      "https://web.whatsapp.com/send?phone=919528252099&text=" + encodeURIComponent(text)
+      "https://web.whatsapp.com/send?phone=917817085910&text=" + encodeURIComponent(text)
     );
   }
 
@@ -171,7 +171,7 @@
     if (liveOnLocal) {
       return (
         "Payment may fail on localhost with live keys. Use Razorpay Test keys in .env, " +
-        "or deploy your site and register the domain in Razorpay. WhatsApp: +91 95282 52099"
+        "or deploy your site and register the domain in Razorpay. WhatsApp: +91 78170 85910"
       );
     }
     return desc || "Payment failed. Try again or use WhatsApp.";

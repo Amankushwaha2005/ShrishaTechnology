@@ -11,8 +11,8 @@ const brand = "#TechWithAman";
 const company = {
   name: "#TechWithAman",
   tagline: "Websites · Apps · Logo Design · Student Projects",
-  email: "hello@techwithaman.com",
-  phone: "+91 95282 52099",
+  email: "mayankklush2006@gmail.com",
+  phone: "+91 78170 85910",
 };
 
 const navItems = [

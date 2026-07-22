@@ -47,7 +47,7 @@
         <input id="twa-ai-chat-input" type="text" placeholder="Ask about website, app, logo, student project…" maxlength="2000" aria-label="Your question" />
         <button type="submit" class="twa-ai-chat__send" aria-label="Send">➤</button>
       </form>
-      <p class="twa-ai-chat__foot">Human help: <a href="contact.html">Contact</a> · WhatsApp +91 95282 52099</p>
+      <p class="twa-ai-chat__foot">Human help: <a href="contact.html">Contact</a> · WhatsApp +91 78170 85910</p>
     </div>
   </div>`;
 

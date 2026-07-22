@@ -44,7 +44,7 @@
     const combined = `${m} ${recentCtx(history)}`.trim();
 
     if (/price|pricing|cost|kitna|plan|package|budget|paisa/.test(combined)) {
-      return "Website plans: Starter from ₹2,999, Professional from ₹7,999, Premium/CMS from ₹12,999. Apps & logo alag packages. Pricing page dekho — exact quote WhatsApp +91 95282 52099 par.";
+      return "Website plans: Starter from ₹2,999, Professional from ₹7,999, Premium/CMS from ₹12,999. Apps & logo alag packages. Pricing page dekho — exact quote WhatsApp +91 78170 85910 par.";
     }
 
     if (/banani|banwana|bana do|website chahiye|site chahiye|website.*ban|ban.*website/.test(combined)) {
@@ -52,7 +52,7 @@
     }
 
     if (/student|viva|final year|college|btech|project/.test(combined)) {
-      return "Student project: code, report, PPT, viva help — deadline batao. WhatsApp +91 95282 52099 ya Contact page use karo.";
+      return "Student project: code, report, PPT, viva help — deadline batao. WhatsApp +91 78170 85910 ya Contact page use karo.";
     }
 
     if (/app|android|flutter|mobile/.test(combined)) {
@@ -68,7 +68,7 @@
     }
 
     if (/contact|call|email|phone|whatsapp|number|baat/.test(combined)) {
-      return "Contact: WhatsApp/call +91 95282 52099, email hello@techwithaman.com. Contact page par form bhi hai.";
+      return "Contact: WhatsApp/call +91 78170 85910, email mayankklush2006@gmail.com. Contact page par form bhi hai.";
     }
 
     if (/time|delivery|deadline|kitne din|kab tak|jaldi/.test(combined)) {
@@ -76,14 +76,14 @@
     }
 
     if (/kaise|kese|process|steps/.test(combined)) {
-      return "Step 1: requirement bhejo → 2: quote/timeline → 3: design → 4: build → 5: launch. WhatsApp +91 95282 52099 ya /contact se shuru karo.";
+      return "Step 1: requirement bhejo → 2: quote/timeline → 3: design → 4: build → 5: launch. WhatsApp +91 78170 85910 ya /contact se shuru karo.";
     }
 
     if (/hello|hi|hey|namaste|help|hii/.test(combined)) {
       return "Hi! Main #TechWithAman assistant. Website, app, logo, student project — kya chahiye?";
     }
 
-    return "Thanks! #TechWithAman websites, apps, logos & student projects karta hai. Pricing/services poochho ya WhatsApp +91 95282 52099 par likho — team reply karegi.";
+    return "Thanks! #TechWithAman websites, apps, logos & student projects karta hai. Pricing/services poochho ya WhatsApp +91 78170 85910 par likho — team reply karegi.";
   }
 
   function esc(s) {
