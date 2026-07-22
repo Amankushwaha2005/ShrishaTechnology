@@ -47,10 +47,9 @@ def create_app() -> Flask:
         init_db()
         app.config["DB_AVAILABLE"] = True
     except Exception as exc:
-        if settings.is_production:
-            raise
         app.config["DB_AVAILABLE"] = False
-        app.logger.warning(
+        log = app.logger.error if settings.is_production else app.logger.warning
+        log(
             "PostgreSQL unavailable — pages will load but login/forms/payments are disabled. (%s)",
             exc,
         )
