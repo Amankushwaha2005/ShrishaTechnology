@@ -5,7 +5,7 @@
 
 <div class="login-social-list">
   {% if googleOn %}
-    <a class="login-social-btn" href="/auth/google?from={{ fromPage }}" aria-label="Continue with Google">
+    <a class="login-social-btn" href="/auth/google?from={{ fromPage }}" data-google-popup data-google-from="{{ fromPage }}" aria-label="Continue with Google">
       <span class="social-icon social-icon-google" aria-hidden="true">
         <svg viewBox="0 0 24 24" role="img">
           <path fill="#EA4335" d="M12 11.2v3.9h5.5c-.2 1.3-1.5 3.8-5.5 3.8-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 4.4 14.6 3.5 12 3.5A8.5 8.5 0 1 0 12 20.5c4.9 0 8.1-3.4 8.1-8.2 0-.6-.1-1-.2-1.1H12Z"/>
@@ -70,9 +70,7 @@
   {% endif %}
 </div>
 
-{% if (not googleOn) or (not githubOn) or (not microsoftOn) %}
-  <p class="auth-hint auth-hint-small">
-    Disabled buttons need OAuth keys on Render. See <code>SOCIAL-LOGIN-SETUP.md</code>.
-  </p>
+{% if not googleOn %}
+  <p class="auth-hint auth-hint-small">Google login is not configured yet.</p>
 {% endif %}
 

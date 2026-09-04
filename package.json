@@ -1,11 +1,11 @@
 {
-  "name": "web-project",
+  "name": "shrisha-technology",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shrisha Technology website",
   "main": "main.js",
   "scripts": {
-    "start": "python -m pybackend.app",
-    "dev": "python -m pybackend.app",
+    "start": "mvn -f backend/pom.xml spring-boot:run",
+    "dev": "mvn -f backend/pom.xml spring-boot:run",
     "sync-pages": "node scripts/sync-html-to-ejs.js",
     "download-tech-icons": "node scripts/download-tech-icons.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": ">=20"
+    "java": ">=21"
   },
   "type": "commonjs",
   "dependencies": {},

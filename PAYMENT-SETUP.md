@@ -17,7 +17,7 @@ Clients can **book a package and pay advance** from:
 **Live keys (`rzp_live_`) do NOT accept payments from `127.0.0.1`.** Razorpay blocks them as an unregistered website (you may see “payment failed” on the site even if UPI shows debited — Razorpay reverses failed attempts).
 
 - **Local testing:** use **Test** keys (`rzp_test_`) in `.env`
-- **Real payments:** deploy on your domain (e.g. `https://techwithaman.com`) and add that URL in Razorpay Dashboard → **Account & Settings → Website & app settings**
+- **Real payments:** deploy on your domain (e.g. `https://shrishatechnology.com`) and add that URL in Razorpay Dashboard → **Account & Settings → Website & app settings**
 
 ## 2. Add keys to `.env`
 

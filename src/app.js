@@ -59,7 +59,7 @@ function createApp() {
 </head>
 <body>
   <h1><span class="ok">OK</span> — server is running</h1>
-  <p>#TechWithAman · Express · <code>/health</code></p>
+  <p>Shrisha Technology · Express · <code>/health</code></p>
   <p>Time (server): ${new Date().toISOString()}</p>
   <p><a href="/" style="color:#8af">Open home</a></p>
 </body>
@@ -70,7 +70,7 @@ function createApp() {
 
   app.get("/api/site-info", (req, res) => {
     res.json({
-      site: "techwithaman-website",
+      site: "shrisha-technology",
       version: "payments-v2",
       paymentEnabled: isPaymentEnabled(),
       hasRazorpayKey: !!getRazorpayKeyId(),
@@ -90,7 +90,7 @@ function createApp() {
 
   app.use(
     session({
-      name: "techwithaman.sid",
+      name: "shrisha-technology.sid",
       secret: process.env.SESSION_SECRET || "dev-session-secret-change-me",
       resave: false,
       saveUninitialized: false,

@@ -2,41 +2,183 @@
    ABOUT PAGE
    URL: /about
    File: views/pages/about.ejs
-   Team story, mission, values sections
    ============================================================================= %>
 <%- include("../partials/head", { page }) %>
 <%- include("../partials/navbar", { navItems, brand, page }) %>
 
   <main class="about-page">
-    <section class="about-founder section">
-      <div class="container about-founder-grid">
-        <div class="about-founder-copy">
-          <h1>Mayank kushwaha</h1>
-          <p class="about-company-name">Founder &amp; Lead Developer — <strong>#TechWithAman</strong></p>
+    <section class="about-hero">
+      <div class="about-hero__glow" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="about-crumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>About Shrisha Technology</span>
+        </nav>
+        <p class="about-kicker">Who we are</p>
+        <h1>
+          India’s premier custom
+          <span>website, software &amp; growth studio</span>
+        </h1>
+        <p class="about-hero__lead">
+          We build digital infrastructure for growing businesses — websites, apps, software,
+          <strong>SEO &amp; GEO</strong>, and student projects — with agency-grade craft at a clear, honest price.
+        </p>
+        <div class="about-hero__actions">
+          <a class="btn" href="/contact">Start a project</a>
+          <a class="btn btn-outline" href="/services">View services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-mission section">
+      <div class="container about-mission__inner">
+        <h2>Our mission</h2>
+        <p>
+          To make high-quality software engineering reachable for India’s startups, shops, and students —
+          <strong>custom, scalable, and affordable</strong> products that look professional, load fast, and
+          get found on Google and in AI search.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-why section">
+      <div class="container about-why__grid">
+        <figure class="about-why__media">
+          <img
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1400&q=80"
+            width="1400"
+            height="933"
+            alt="Workspace with laptop and code"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+        <div class="about-why__copy">
+          <h2>Why Shrisha Technology?</h2>
           <p>
-            #TechWithAman is a client-focused digital studio specialising in <strong>websites, mobile applications,
-            brand identity</strong>, and <strong>academic final-year projects</strong>. I work hands-on with every
-            engagement—from discovery through delivery—so businesses launch with a credible online presence and
-            students receive submission-ready work on schedule.
+            Too many businesses are stuck between expensive agencies and unreliable one-off freelancers.
+            We sit in the middle: a focused studio with process, design discipline, and a single point of contact.
           </p>
           <p>
-            Whether you run a local business, an early-stage startup, or are completing an engineering degree, you
-            get transparent pricing, disciplined timelines, and dependable post-launch support. Our approach is
-            straightforward: <em>engineering excellence paired with clear, honest communication</em>—no jargon, no
-            unnecessary complexity.
+            From first brief to launch — and after — you get transparent timelines, milestone demos, and
+            work you can actually own. Websites, apps, branding, <strong>SEO &amp; GEO</strong>, and
+            academic projects are delivered to the same standard.
           </p>
-          <div class="about-founder-actions">
-            <a class="btn" href="/contact">Start a Project</a>
-            <a class="btn btn-outline" href="/work">Work With Us</a>
-            <a class="btn btn-outline" href="/portfolio">View Portfolio</a>
-            <a class="btn btn-outline" href="https://github.com/Amankushwaha2005" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-          <ul class="about-founder-stats" aria-label="Highlights">
-            <li><strong>100+</strong><span>Projects delivered</span></li>
-            <li><strong>4.2</strong><span>Client rating</span></li>
-            <li><strong>24/7</strong><span>WhatsApp support</span></li>
+          <ul class="about-why__stats" aria-label="Studio highlights">
+            <li>
+              <strong>10+</strong>
+              <span>Projects delivered</span>
+            </li>
+            <li>
+              <strong>100%</strong>
+              <span>Transparent pricing</span>
+            </li>
+            <li>
+              <strong>24/7</strong>
+              <span>Local support</span>
+            </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section class="about-people section" id="founder">
+      <div class="container about-people__narrow">
+        <p class="about-people__label">Founder</p>
+        <article class="about-profile about-profile--founder">
+          <h2 class="about-profile__name">Krishna Gupta</h2>
+          <p class="about-profile__title">Founder</p>
+          <p class="about-profile__bio">Responsible for the overall vision, leadership, strategy, and growth of the company.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-people about-people--team section" id="team">
+      <div class="container">
+        <p class="about-people__label about-people__label--center">Team</p>
+        <div class="about-people__row">
+          <article class="about-profile">
+            <h3 class="about-profile__name">Aman Kushwaha</h3>
+            <p class="about-profile__title">Software Developer</p>
+            <p class="about-profile__bio">Responsible for designing, developing, and maintaining the website, backend systems, database, and technical infrastructure.</p>
+          </article>
+          <article class="about-profile">
+            <h3 class="about-profile__name">Sanjay Kushwaha</h3>
+            <p class="about-profile__title">Operations &amp; Marketing</p>
+            <p class="about-profile__bio">Responsible for managing business operations, marketing activities, customer relationships, and overall business growth.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-principles section">
+      <div class="container">
+        <header class="about-principles__head">
+          <h2>Our core principles</h2>
+          <p>The values that guide every project we take on.</p>
+        </header>
+        <div class="about-principles__grid">
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 4 7.5V12c0 5 3.4 9.4 8 10.5C16.6 21.4 20 17 20 12V7.5L12 3Zm0 2.2 6 3.4V12c0 3.9-2.5 7.4-6 8.4-3.5-1-6-4.5-6-8.4V8.6l6-3.4Z"/></svg>
+            </span>
+            <h3>Craft first</h3>
+            <p>Clean code, considered UI, and performance that holds up on real phones — not just demo laptops.</p>
+          </article>
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5.2 3.4 9.8 8 11 4.6-1.2 8-5.8 8-11V6l-8-4Zm-1 14.2-3.5-3.5 1.4-1.4L11 13.4l4.6-4.6 1.4 1.4L11 16.2Z"/></svg>
+            </span>
+            <h3>Absolute transparency</h3>
+            <p>Scope, price, and dates in writing. You see progress as we build — no surprise invoices.</p>
+          </article>
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 11a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 8 11Zm8 0a3.5 3.5 0 1 0-3.5-3.5A3.5 3.5 0 0 0 16 11ZM8 13c-3 0-6 1.5-6 3.5V19h8.2A6.5 6.5 0 0 1 16 12.1 6.4 6.4 0 0 0 8 13Zm8 1a4.5 4.5 0 1 0 4.5 4.5A4.5 4.5 0 0 0 16 14Zm.8 2.2h-.8v2.3l2 1.2.4-.7-1.6-.9Z"/></svg>
+            </span>
+            <h3>Long-term partners</h3>
+            <p>We plan for after launch: handover, training, and maintenance so you are not left guessing.</p>
+          </article>
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 18h16v2H4v-2Zm1.5-3.2 3.2-8.6h2.1L14 14.8h-2.1l-.6-1.8H8.2l-.6 1.8H5.5ZM9 11.4h2.3L10.2 8 9 11.4Zm7.6 3.4V6.8h4.2V8.6h-2.4v1.4H20v1.7h-1.6V13h2.5v1.8h-4.3Z"/></svg>
+            </span>
+            <h3>SEO &amp; GEO ready</h3>
+            <p>Pages structured for Google and for AI answers — so customers can find you in search and chat.</p>
+          </article>
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 4.5 7.2V12c0 4.6 3.2 8.8 7.5 9.8 4.3-1 7.5-5.2 7.5-9.8V7.2L12 3Zm0 2.2 5.5 3.1v3.5c0 1.8-.5 3.6-1.4 5.1A16 16 0 0 0 12 18.6a16 16 0 0 0-4.1-1.7 9.4 9.4 0 0 1-1.4-5.1V8.3L12 5.2Z"/></svg>
+            </span>
+            <h3>Education first</h3>
+            <p>Student projects include documentation, PPT support, and viva guidance — not just dumped code.</p>
+          </article>
+          <article class="about-principle">
+            <span class="about-principle__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 15.5c0 3-3.6 5.5-8 5.5s-8-2.5-8-5.5V8.8C4 5.8 7.6 3.3 12 3.3s8 2.5 8 5.5v6.7ZM12 5.3c-3.3 0-6 1.6-6 3.5s2.7 3.5 6 3.5 6-1.6 6-3.5-2.7-3.5-6-3.5Z"/></svg>
+            </span>
+            <h3>Always reachable</h3>
+            <p>WhatsApp, call, and on-site chat — answers in hours, not days, in the language you already use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-offer section">
+      <div class="container">
+        <header class="about-principles__head">
+          <h2>What we build</h2>
+          <p>One studio for launch, growth, and academic delivery.</p>
+        </header>
+        <ul class="about-offer__list">
+          <li><a href="/services#website-development">Websites</a></li>
+          <li><a href="/services#app-development">Apps</a></li>
+          <li><a href="/services#seo-geo">SEO &amp; GEO</a></li>
+          <li><a href="/pricing#logo-design">Logo &amp; brand</a></li>
+          <li><a href="/services#software-development">Custom software</a></li>
+          <li><a href="/contact">Student projects</a></li>
+        </ul>
       </div>
     </section>
 
@@ -64,94 +206,13 @@
       </div>
     </section>
 
-    <section class="section about-topics-section">
-      <div class="container">
-        <p class="small-heading">What we stand for</p>
-        <h2 class="about-topics-heading">Mission, skills &amp; how we work</h2>
-        <div class="about-topics-grid">
-          <article class="about-topic-card card">
-            <div class="about-topic-visual">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" width="600" height="380" alt="" loading="lazy" decoding="async">
-              <span class="about-topic-icon" aria-hidden="true">🎯</span>
-            </div>
-            <div class="about-topic-body">
-              <h3>My Mission</h3>
-              <p>
-                To deliver practical digital outcomes for clients and students—not merely code, but solutions
-                grounded in real business and academic requirements.
-              </p>
-              <ul class="about-topic-features">
-                <li>Professional websites engineered to build trust and drive enquiries</li>
-                <li>Industry-aligned student projects with documentation and viva preparation</li>
-                <li>Transparent pricing with no hidden costs or scope creep</li>
-                <li>Continued support after launch, when you need it most</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="about-topic-card card">
-            <div class="about-topic-visual">
-              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" width="600" height="380" alt="" loading="lazy" decoding="async">
-              <span class="about-topic-icon" aria-hidden="true">💻</span>
-            </div>
-            <div class="about-topic-body">
-              <h3>My Expertise</h3>
-              <p>
-                A full-stack perspective across design, development, and deployment—using modern, maintainable
-                technologies throughout the stack.
-              </p>
-              <ul class="about-topic-features">
-                <li>Web: HTML, CSS, JavaScript, React, Node.js, WordPress</li>
-                <li>Mobile: Android, Flutter, REST APIs, Firebase</li>
-                <li>Branding: logo systems, colour palettes, and social-ready assets</li>
-                <li>Academic: web and app builds, mini software, and structured reports</li>
-              </ul>
-              <div class="about-topic-tags">
-                <span>Web</span><span>App</span><span>Logo</span><span>Student</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="about-topic-card card">
-            <div class="about-topic-visual">
-              <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" width="600" height="380" alt="" loading="lazy" decoding="async">
-              <span class="about-topic-icon" aria-hidden="true">🤝</span>
-            </div>
-            <div class="about-topic-body">
-              <h3>Work Style</h3>
-              <p>
-                Structured communication, realistic timelines, and a partnership that continues beyond
-                handover.
-              </p>
-              <ul class="about-topic-features">
-                <li>Complimentary discovery call or WhatsApp consultation</li>
-                <li>Milestone reviews with progress screenshots and demos</li>
-                <li>Revision cycles included per package tier</li>
-                <li>Complete handover: source code, hosting guidance, and optional walkthrough</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="about-topic-card card">
-            <div class="about-topic-visual">
-              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" width="600" height="380" alt="" loading="lazy" decoding="async">
-              <span class="about-topic-icon" aria-hidden="true">⭐</span>
-            </div>
-            <div class="about-topic-body">
-              <h3>Why #TechWithAman</h3>
-              <p>
-                Accessible pricing with agency-grade polish—built for ambitious clients and students across India
-                and beyond.
-              </p>
-              <ul class="about-topic-features">
-                <li>Plans from ₹2,999—accessible for startups and small businesses</li>
-                <li>Single point of contact: direct access to Mayank and responsive support</li>
-                <li>Verified portfolio of delivered, production-ready work</li>
-                <li>AI assistant and WhatsApp—get answers to your questions without delay</li>
-              </ul>
-              <a class="about-topic-link" href="/pricing">See pricing packages →</a>
-            </div>
-          </article>
+    <section class="about-cta section">
+      <div class="container about-cta__box">
+        <h2>Ready to start?</h2>
+        <p>Tell us what you need. We will reply with a clear plan, timeline, and quote.</p>
+        <div class="about-hero__actions">
+          <a class="btn" href="/contact">Get a quote</a>
+          <a class="btn btn-outline" href="/portfolio">View portfolio</a>
         </div>
       </div>
     </section>

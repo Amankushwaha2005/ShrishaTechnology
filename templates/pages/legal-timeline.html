@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Legal</span>
+        <h1>Project timeline as agreed</h1>
+        <p>Delivery dates follow what we confirm in writing after your advance and content. Last updated: 4 September 2026.</p>
+      </div>
+    </section>
+    <section class="section legal-section">
+      <div class="container legal-layout">
+        {% include "partials/legal-toc.html" %}
+        <article class="legal-card card">
+          <h2>Project timeline as agreed</h2>
+          <p>
+            Delivery dates are those we confirm after the advance and after we have the content we need (text, photos, logins, college guidelines, etc.).
+            A simple site is often 5–10 working days; larger apps take longer. Student project dates follow your deadline only if we accept it in writing.
+          </p>
+          <ul>
+            <li>Waiting on your feedback, files, or approvals pauses the clock. The new date is the original date plus waiting time.</li>
+            <li>App store, domain, or hosting approval is outside our control. We submit; the platform decides.</li>
+            <li>Rush work may need a surcharge if we have to reshuffle other bookings.</li>
+            <li>We will update you if a dependency (plugin, API, college rule) changes the plan.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+{% endblock %}

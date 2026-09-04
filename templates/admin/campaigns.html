@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="admin-body">
+  <div class="admin-app">
+    <aside class="admin-sidebar" aria-label="Admin navigation">
+      <a class="admin-brand" href="/admin" aria-label="ShrishaTechnology">
+        <img src="/images/logo.png" alt="" class="admin-brand__logo" width="40" height="40">
+        <span class="admin-brand__text">ShrishaTechnology</span>
+      </a>
+      <p class="admin-sidebar-tag">Control center</p>
+      <nav class="admin-side-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/campaigns" class="is-current">Campaigns &amp; media</a>
+        <a href="/admin#inbox-orders">Payments &amp; orders</a>
+        <a href="/admin#inbox-contact">Contact inbox</a>
+        <a href="/admin#users">Users</a>
+      </nav>
+      <div class="admin-sidebar-foot">
+        <a class="admin-sidebar-link" href="/">View site</a>
+        <a class="admin-sidebar-link" href="/auth/logout">Logout</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <p class="admin-studio-kicker">Media studio</p>
+          <h1 class="admin-title">Campaigns &amp; media</h1>
+          <p class="admin-sub">Publish festival offers, ads, photos and videos to the live site.</p>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 14.5a8.5 8.5 0 0 1-11.6-11A9.5 9.5 0 1 0 21 14.5Z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11h1a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2Zm17 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM5.6 4.2a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4Zm10.7 10.7a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4ZM18.4 4.2a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM7.7 14.9a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1 1.4 0Z"/></svg>
+          </span>
+        </button>
+      </header>
+
+      <div class="admin-content admin-studio">
+        {% if flash == 'saved' %}
+          <p class="admin-flash admin-flash-ok">Published. Open the homepage to preview.</p>
+        {% elif flash == 'toggled' %}
+          <p class="admin-flash admin-flash-ok">Visibility updated.</p>
+        {% elif flash == 'deleted' %}
+          <p class="admin-flash admin-flash-ok">Removed from the library.</p>
+        {% endif %}
+        {% if err %}
+          <p class="admin-flash admin-flash-err">{{ err }}</p>
+        {% endif %}
+
+        <section class="admin-studio-panel">
+          <header class="admin-studio-panel__head">
+            <div>
+              <h2>New asset</h2>
+              <p>Choose type, add copy, then upload a file or paste a YouTube URL.</p>
+            </div>
+          </header>
+
+          <form class="admin-campaign-form" action="/admin/campaigns" method="post" enctype="multipart/form-data">
+            <div class="admin-studio-block">
+              <h3>Placement</h3>
+              <div class="admin-campaign-grid">
+                <label class="admin-field">
+                  <span>Type</span>
+                  <select name="kind" required>
+                    <option value="offer">Festival / seasonal offer</option>
+                    <option value="ad">Advertisement</option>
+                    <option value="photo">Photo</option>
+                    <option value="video">Video</option>
+                  </select>
+                </label>
+                <label class="admin-field">
+                  <span>Show on</span>
+                  <select name="placement" required>
+                    <option value="ticker">Top bar — site-wide</option>
+                    <option value="popup">Welcome popup</option>
+                    <option value="gallery">Home gallery</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="admin-studio-block">
+              <h3>Copy</h3>
+              <div class="admin-campaign-grid">
+                <label class="admin-field admin-campaign-span">
+                  <span>Title</span>
+                  <input name="title" type="text" maxlength="120" placeholder="Diwali offer — 15% off websites" required>
+                </label>
+                <label class="admin-field admin-campaign-span">
+                  <span>Message</span>
+                  <textarea name="body" rows="3" maxlength="500" placeholder="Short line customers will see"></textarea>
+                </label>
+                <label class="admin-field">
+                  <span>Button text</span>
+                  <input name="cta_label" type="text" maxlength="40" placeholder="View pricing">
+                </label>
+                <label class="admin-field">
+                  <span>Button link</span>
+                  <input name="cta_url" type="text" placeholder="/pricing or https://">
+                </label>
+              </div>
+            </div>
+
+            <div class="admin-studio-block">
+              <h3>Schedule</h3>
+              <div class="admin-campaign-grid">
+                <label class="admin-field">
+                  <span>Starts</span>
+                  <input name="starts_on" type="date">
+                </label>
+                <label class="admin-field">
+                  <span>Ends</span>
+                  <input name="ends_on" type="date">
+                </label>
+              </div>
+            </div>
+
+            <div class="admin-studio-block">
+              <h3>Media</h3>
+              <label class="admin-dropzone">
+                <input id="campaign-file" name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm">
+                <span class="admin-dropzone__art" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 4v12m0 0 4-4m-4 4-4-4M4 18h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <strong id="campaign-file-label">Upload photo or video</strong>
+                <small>JPG, PNG, WEBP, GIF, MP4 or WEBM · max 20 MB</small>
+              </label>
+              <label class="admin-field admin-campaign-span" style="margin-top:14px">
+                <span>Or paste image / YouTube URL</span>
+                <input name="media_url" type="url" placeholder="https://youtube.com/watch?v=…">
+              </label>
+            </div>
+
+            <div class="admin-studio-foot">
+              <label class="admin-switch">
+                <input name="active" type="checkbox" value="1" checked>
+                <span>Publish immediately</span>
+              </label>
+              <button class="btn admin-studio-publish" type="submit">Publish to site</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="admin-studio-library">
+          <header class="admin-studio-panel__head">
+            <div>
+              <h2>Library</h2>
+              <p>Live assets appear on the public site. Pause to hide without deleting.</p>
+            </div>
+          </header>
+
+          <div class="admin-campaign-list">
+            {% for c in campaigns %}
+              <article class="admin-campaign-card kind-{{ c.kind }} {% if not c.isActive %}is-off{% endif %}">
+                <div class="admin-campaign-media">
+                  {% if c.isYoutube %}
+                    <img src="{{ c.thumbUrl }}" alt="">
+                  {% elif c.isVideoFile %}
+                    <video src="{{ c.media_url }}" muted></video>
+                  {% elif c.hasMedia %}
+                    <img src="{{ c.thumbUrl or c.media_url }}" alt="">
+                  {% else %}
+                    <div class="admin-campaign-empty">No file</div>
+                  {% endif %}
+                  {% if c.isActive %}
+                    <span class="admin-campaign-live">Live</span>
+                  {% else %}
+                    <span class="admin-campaign-live is-paused">Paused</span>
+                  {% endif %}
+                </div>
+                <div class="admin-campaign-body">
+                  <p class="admin-campaign-meta">
+                    <span class="admin-pill admin-pill-kind">{{ c.kindLabel }}</span>
+                    <span class="admin-muted">{{ c.placementLabel }}</span>
+                  </p>
+                  <h3>{{ c.title }}</h3>
+                  {% if c.body %}<p class="admin-campaign-excerpt">{{ c.body }}</p>{% endif %}
+                  <div class="admin-campaign-actions">
+                    <form method="post" action="/admin/campaigns/{{ c.id }}/toggle">
+                      <button class="btn btn-small" type="submit">{% if c.isActive %}Pause{% else %}Go live{% endif %}</button>
+                    </form>
+                    <form method="post" action="/admin/campaigns/{{ c.id }}/delete" onsubmit="return confirm('Delete this campaign?');">
+                      <button class="btn btn-small btn-outline admin-btn-danger" type="submit">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </article>
+            {% else %}
+              <div class="admin-studio-blank">
+                <p>Library is empty</p>
+                <span>Publish an offer or upload a photo to fill this studio.</span>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="/main.js"></script>
+  <script>
+    (function () {
+      var input = document.getElementById("campaign-file");
+      var label = document.getElementById("campaign-file-label");
+      if (!input || !label) return;
+      input.addEventListener("change", function () {
+        label.textContent = input.files && input.files[0] ? input.files[0].name : "Upload photo or video";
+      });
+    })();
+  </script>
+</body>
+</html>

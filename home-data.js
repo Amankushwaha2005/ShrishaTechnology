@@ -112,6 +112,23 @@ window.HOME_DATA = {
       link: "/pricing#logo-design",
       linkLabel: "Logo packages",
     },
+    "seo-geo": {
+      title: "SEO & GEO",
+      tag: "Service",
+      image:
+        "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80",
+      summary: "Google rankings plus visibility in AI search and answer engines.",
+      details: [
+        "On-page and technical SEO",
+        "Generative Engine Optimization (GEO)",
+        "Local / geographic search (maps & GBP)",
+        "Content and keyword strategy",
+        "Monthly reporting and next-step plan",
+      ],
+      price: "From ₹3,999/mo",
+      link: "/services#seo-geo",
+      linkLabel: "Explore SEO & GEO",
+    },
     "student-projects": {
       title: "Student Projects",
       tag: "Service",
@@ -133,7 +150,7 @@ window.HOME_DATA = {
   showcase: [
     {
       title: "Business Website",
-      brand: "TechWithAman Client",
+      brand: "Shrisha Technology Client",
       image:
         "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1200&q=80",
       description:
@@ -166,6 +183,15 @@ window.HOME_DATA = {
       description:
         "Full stack student project with report, PPT support and viva guidance — delivered on deadline.",
       homeId: "student-projects",
+    },
+    {
+      title: "SEO & GEO",
+      brand: "Search Visibility",
+      image:
+        "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=1200&q=80",
+      description:
+        "Rank on Google and get cited in AI answers — SEO plus GEO for maps, ChatGPT, Perplexity, and AI Overviews.",
+      homeId: "seo-geo",
     },
     {
       title: "Brand & Logo Kit",

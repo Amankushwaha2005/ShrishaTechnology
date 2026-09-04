@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Legal</span>
+        <h1>Advance payment required</h1>
+        <p>Work begins only after the advance for your package is received. Last updated: 4 September 2026.</p>
+      </div>
+    </section>
+    <section class="section legal-section">
+      <div class="container legal-layout">
+        {% include "partials/legal-toc.html" %}
+        <article class="legal-card card">
+          <h2>Advance payment required</h2>
+          <p>
+            Work starts after the advance is received. The checkout page shows the advance for your plan
+            (currently {{ paymentAdvancePercent|default(50) }}% of the package total, unless we agree a different split in writing).
+          </p>
+          <ul>
+            <li>The remaining balance is due before final files, live handover, or store listing — as stated on your order.</li>
+            <li>Online payments go through the gateway shown at checkout (for example Razorpay). Card/UPI charges follow that provider’s rules.</li>
+            <li>A booking is confirmed only when payment status is successful and you receive an order ID.</li>
+            <li>If payment fails, the slot is not reserved. You can retry from the order or track page.</li>
+          </ul>
+          <p>Never send project passwords or card OTPs on chat. Use the official payment page only.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+{% endblock %}

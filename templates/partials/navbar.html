@@ -1,34 +1,51 @@
   <header class="site-header">
     <nav class="container navbar">
-      <a href="/" class="logo">{{ brand }}</a>
+      <a href="/" class="logo" aria-label="ShrishaTechnology">
+        <img src="/images/logo.png" alt="" class="logo-img" width="48" height="48">
+        <span class="logo-text">ShrishaTechnology</span>
+      </a>
       <ul class="nav-links">
         {% for item in navItems %}
           <li>
             <a href="{{ item.href }}" {% if page.key == item.key %}aria-current="page"{% endif %}>{{ item.label }}</a>
           </li>
         {% endfor %}
-        {% if isAdmin %}
-          <li class="only-mobile"><a href="/admin">Admin</a></li>
-        {% endif %}
-        {% if authUser %}
-          <li class="only-mobile"><a href="/">{{ authUser.name }}</a></li>
-          <li class="only-mobile"><a href="/auth/logout">Logout</a></li>
-        {% else %}
-          <li class="only-mobile"><a href="/login">Login</a></li>
-          <li class="only-mobile"><a href="/signup">Signup</a></li>
-        {% endif %}
       </ul>
-      <div class="nav-actions only-desktop">
-        {% if isAdmin %}
-          <a class="btn btn-small admin-nav-btn" href="/admin" title="Admin dashboard">Admin</a>
-        {% endif %}
-        {% if authUser %}
-          <span class="auth-user">Hi, {{ authUser.name }}</span>
-          <a class="btn btn-outline btn-small" href="/auth/logout">Logout</a>
-        {% else %}
-          <a class="btn btn-outline btn-small" href="/login">Login</a>
-          <a class="btn btn-outline btn-small" href="/signup">Signup</a>
-        {% endif %}
+      <div class="nav-actions">
+        <div class="account-menu">
+          <button
+            class="account-menu__btn"
+            type="button"
+            aria-label="Account"
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="Account"
+          >
+            {% if authUser %}
+              {% if accountPicture %}
+              <img class="account-menu__photo" src="{{ accountPicture }}" alt="" width="42" height="42" referrerpolicy="no-referrer">
+              {% else %}
+              <span class="account-menu__initial" aria-hidden="true">{{ accountInitial }}</span>
+              {% endif %}
+            {% else %}
+            <svg class="account-menu__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12a4.2 4.2 0 1 0-4.2-4.2A4.2 4.2 0 0 0 12 12Zm0 2.2c-3.4 0-8 1.7-8 5.1V21h16v-1.7c0-3.4-4.6-5.1-8-5.1Z"/>
+            </svg>
+            {% endif %}
+          </button>
+          <div class="account-menu__dropdown" hidden>
+            {% if authUser %}
+            <p class="account-menu__name">Hi, {{ authUser.name }}</p>
+            {% if isAdmin %}
+            <a href="/admin">Admin</a>
+            {% endif %}
+            <a href="/auth/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Sign up</a>
+            {% endif %}
+          </div>
+        </div>
       </div>
       <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
         <span class="theme-icon" aria-hidden="true">

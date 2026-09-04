@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Legal</span>
+        <h1>Terms &amp; conditions</h1>
+        <p>These terms apply when you enquire, book, or pay {{ brand }}. Last updated: 4 September 2026.</p>
+      </div>
+    </section>
+    <section class="section legal-section">
+      <div class="container legal-layout">
+        {% include "partials/legal-toc.html" %}
+        <article class="legal-card card">
+          <h2>Terms &amp; conditions apply</h2>
+          <p>
+            By placing an order, paying an advance, or asking us to start work, you agree to these terms.
+            {{ brand }} provides custom digital services — not off-the-shelf software licences unless we say so in writing.
+          </p>
+          <ul>
+            <li>Quotes are valid for 14 days unless a different date is written on the quote.</li>
+            <li>The scope of work is what we confirm on WhatsApp, email, or the order page. Extra pages, features, or revisions beyond the agreed package are billed separately.</li>
+            <li>You confirm you have the right to use logos, photos, copy, and other material you send us.</li>
+            <li>We may show completed public work in our portfolio unless you ask us in writing to keep it private.</li>
+            <li>Indian law applies. Disputes will be handled in the courts of Uttar Pradesh, India.</li>
+          </ul>
+          <p>
+            Questions: <a href="/contact">Contact form</a> or WhatsApp
+            <a href="https://wa.me/917992020591">+91 79920 20591</a>.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+{% endblock %}

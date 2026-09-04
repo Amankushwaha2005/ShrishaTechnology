@@ -98,7 +98,7 @@
         key: data.keyId,
         amount: data.amountPaise,
         currency: "INR",
-        name: "TechWithAman",
+        name: "Shrisha Technology",
         description: data.description,
         order_id: data.razorpayOrderId,
         prefill: {
@@ -106,7 +106,7 @@
           email: panel.dataset.customerEmail || "",
           contact: panel.dataset.customerPhone || "",
         },
-        theme: { color: "#2f6efb" },
+        theme: { color: "#c9a227" },
         handler: async (response) => {
           try {
             await verifyPayment(response);

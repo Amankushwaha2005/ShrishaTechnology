@@ -1,0 +1,44 @@
+{% if promoTicker %}
+  <aside class="promo-ticker" role="region" aria-label="Current offer">
+    <div class="promo-ticker__inner">
+      <span class="promo-ticker__kicker">{{ promoTicker.kindLabel }}</span>
+      <p class="promo-ticker__text">
+        <strong>{{ promoTicker.title }}</strong>
+        {% if promoTicker.body %} — {{ promoTicker.body }}{% endif %}
+      </p>
+      {% if promoTicker.cta_url %}
+        <a class="promo-ticker__cta" href="{{ promoTicker.cta_url }}">{{ promoTicker.cta_label or "View" }}</a>
+      {% endif %}
+    </div>
+  </aside>
+{% endif %}
+
+{% if promoPopup %}
+  <div id="promo-popup" class="promo-popup" hidden data-promo-id="{{ promoPopup.id }}">
+    <div class="promo-popup__backdrop" data-promo-close tabindex="-1"></div>
+    <div class="promo-popup__panel" role="dialog" aria-modal="true" aria-labelledby="promo-popup-title">
+      <button type="button" class="promo-popup__close" data-promo-close aria-label="Close">&times;</button>
+      {% if promoPopup.isYoutube %}
+        <div class="promo-popup__media promo-popup__media--video">
+          <iframe src="{{ promoPopup.embedUrl }}" title="{{ promoPopup.title }}" allowfullscreen loading="lazy"></iframe>
+        </div>
+      {% elif promoPopup.isVideoFile %}
+        <div class="promo-popup__media promo-popup__media--video">
+          <video src="{{ promoPopup.media_url }}" controls playsinline></video>
+        </div>
+      {% elif promoPopup.hasMedia %}
+        <div class="promo-popup__media">
+          <img src="{{ promoPopup.media_url }}" alt="">
+        </div>
+      {% endif %}
+      <div class="promo-popup__copy">
+        <p class="promo-popup__kicker">{{ promoPopup.kindLabel }}</p>
+        <h2 id="promo-popup-title">{{ promoPopup.title }}</h2>
+        {% if promoPopup.body %}<p>{{ promoPopup.body }}</p>{% endif %}
+        {% if promoPopup.cta_url %}
+          <a class="btn" href="{{ promoPopup.cta_url }}">{{ promoPopup.cta_label or "Continue" }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}

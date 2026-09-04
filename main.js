@@ -32,6 +32,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  document.querySelectorAll(".account-menu").forEach((menu) => {
+    const btn = menu.querySelector(".account-menu__btn");
+    const panel = menu.querySelector(".account-menu__dropdown");
+    if (!btn || !panel) return;
+
+    const close = () => {
+      panel.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    btn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const open = panel.hidden;
+      document.querySelectorAll(".account-menu__dropdown").forEach((el) => {
+        el.hidden = true;
+      });
+      document.querySelectorAll(".account-menu__btn").forEach((el) => {
+        el.setAttribute("aria-expanded", "false");
+      });
+      if (open) {
+        panel.hidden = false;
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target)) close();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") close();
+    });
+  });
+
   const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const wordsRaw = typewriterEl.getAttribute("data-words") || "[]";

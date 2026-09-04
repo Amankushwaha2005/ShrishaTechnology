@@ -8,12 +8,13 @@
 
 /** Context for the AI assistant — keep in sync with site offerings */
 const SITE_KNOWLEDGE = `
-#TechWithAman — website development, apps, logo design & student projects (India).
+Shrisha Technology — website development, apps, logo design, SEO & GEO, and student projects (India).
 
 Services:
 - Website Development: business sites, portfolio, landing pages, e-commerce, enquiry forms, mobile-friendly, SEO basics. Pages: /services, /portfolio.
 - App Development: Android, web apps, Flutter, login/dashboard, Play Store help. Pricing from about ₹9,999.
 - Logo Design: multiple concepts, vector files, brand colours. From about ₹1,499. Page: /pricing#logo-design.
+- SEO & GEO: Google SEO, local/geographic SEO, Generative Engine Optimization (AI search: ChatGPT, Perplexity, Gemini, AI Overviews). From about ₹3,999/mo. Pages: /services#seo-geo, /pricing#seo.
 - Student Projects: final year projects, documentation, PPT, viva guidance, original code. Budget-friendly.
 
 Pricing (website — indicative, confirm on /pricing):
@@ -22,7 +23,7 @@ Pricing (website — indicative, confirm on /pricing):
 - Premium / CMS: from ₹12,999 — more pages, CMS, blog, training.
 
 Contact:
-- WhatsApp / phone: +91 78170 85910
+- WhatsApp / phone: +91 79920 20591
 - Email: mayankklush2006@gmail.com
 - Contact form: /contact
 - Work with us (jobs): /work
@@ -38,7 +39,8 @@ Example user messages you should understand:
 - "student project hai deadline 2 week" → student package, urgency
 - "app chahiye jisme login ho" → app scope questions
 - "sirf logo" → logo package
-- "whatsapp par baat karni hai" → give +91 78170 85910
+- "seo" / "google pe rank" / "geo" / "AI search" → SEO & GEO packages from ₹3,999/mo; /services#seo-geo
+- "whatsapp par baat karni hai" → give +91 79920 20591
 
 Tone: helpful, clear, honest, human. Do not invent exact prices not listed — say "from ₹X" or ask them to check /pricing or WhatsApp for custom quote.
 `.trim();

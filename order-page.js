@@ -104,7 +104,7 @@
 
   function whatsappUrl(payload, publicId, advance) {
     const text =
-      "Hi #TechWithAman, I want to pay advance for:\n" +
+      "Hi Shrisha Technology, I want to pay advance for:\n" +
       "• Service: " +
       payload.service +
       "\n• Package: " +
@@ -124,7 +124,7 @@
       (publicId ? "\n• Order ref: " + publicId : "") +
       (payload.notes ? "\n• Notes: " + payload.notes : "");
     return (
-      "https://web.whatsapp.com/send?phone=917817085910&text=" + encodeURIComponent(text)
+      "https://web.whatsapp.com/send?phone=917992020591&text=" + encodeURIComponent(text)
     );
   }
 
@@ -171,7 +171,7 @@
     if (liveOnLocal) {
       return (
         "Payment may fail on localhost with live keys. Use Razorpay Test keys in .env, " +
-        "or deploy your site and register the domain in Razorpay. WhatsApp: +91 78170 85910"
+        "or deploy your site and register the domain in Razorpay. WhatsApp: +91 79920 20591"
       );
     }
     return desc || "Payment failed. Try again or use WhatsApp.";
@@ -222,11 +222,11 @@
       key: data.keyId,
       amount: data.amountPaise,
       currency: "INR",
-      name: "#TechWithAman",
+      name: "Shrisha Technology",
       description: data.description,
       order_id: data.razorpayOrderId,
       prefill: data.customer,
-      theme: { color: "#2f6efb" },
+        theme: { color: "#c9a227" },
       config: {
         display: {
           preferences: { show_default_blocks: true },

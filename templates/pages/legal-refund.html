@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Legal</span>
+        <h1>No refund after delivery</h1>
+        <p>How refunds work before and after we hand over your project. Last updated: 4 September 2026.</p>
+      </div>
+    </section>
+    <section class="section legal-section">
+      <div class="container legal-layout">
+        {% include "partials/legal-toc.html" %}
+        <article class="legal-card card">
+          <h2>No refund after delivery</h2>
+          <p>
+            Once we have delivered the agreed work (live site, source files, app build, logo files, or student project files as per your package),
+            the fee is non-refundable. Digital work cannot be “returned” after handover.
+          </p>
+          <ul>
+            <li>If we have not started work and you cancel, we may refund the unused advance minus gateway fees, at our discretion.</li>
+            <li>If work has started, refunds are not given for change of mind, delay in sending your content, or third-party hosting/app-store rejection caused by your account or content.</li>
+            <li>If we cannot complete the agreed scope for a reason on our side, we will finish the remaining work or refund the unused portion of fees paid — we will confirm this in writing.</li>
+            <li>Chargebacks filed without first contacting us may pause the project until the payment dispute is closed.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+{% endblock %}

@@ -1,4 +1,4 @@
-# Deploy on Render (TechWithAman)
+# Deploy on Render (Shrisha Technology)
 
 Live URL example: `https://techwithaman-website-2026.onrender.com`
 
@@ -101,4 +101,4 @@ This app uses **PostgreSQL** (`DATABASE_URL`). Use Render **PostgreSQL** (free t
 
 ## 6) Custom domain (optional)
 
-Render → service → **Settings** → **Custom Domains** → add `techwithaman.com` and update DNS.
+Render → service → **Settings** → **Custom Domains** → add `shrishatechnology.com` and update DNS.

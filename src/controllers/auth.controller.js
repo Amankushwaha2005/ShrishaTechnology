@@ -204,7 +204,7 @@ function microsoftCallback(req, res) {
 
 function logout(req, res) {
   req.session.destroy(() => {
-    res.clearCookie("techwithaman.sid");
+    res.clearCookie("shrisha-technology.sid");
     res.redirect("/");
   });
 }

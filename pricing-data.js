@@ -307,8 +307,8 @@ window.PRICING_DATA = {
     },
     {
       id: "seo",
-      title: "SEO Packages",
-      subtitle: "Rank higher on Google",
+      title: "SEO & GEO Packages",
+      subtitle: "Rank on Google and show up in AI search",
       image:
         "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&w=800&q=80",
       packages: [
@@ -331,6 +331,21 @@ window.PRICING_DATA = {
           priceLabel: "₹8,999/mo",
           features: ["Technical audit", "Content plan", "Link building guidance", "Bi-weekly reports"],
           options: [{ label: "Pages", choices: ["Up to 10", "Up to 25"] }],
+        },
+        {
+          ribbon: "GEO",
+          ribbonClass: "ribbon-cms",
+          title: "SEO + GEO",
+          description: "Classic SEO plus Generative Engine Optimization for AI answers.",
+          price: 12999,
+          priceLabel: "₹12,999/mo",
+          features: [
+            "SEO + GEO content structure",
+            "Schema & FAQ for AI Overviews",
+            "Entity / brand fact pages",
+            "Monthly SEO & GEO report",
+          ],
+          options: [{ label: "Scope", choices: ["Core pages", "Site-wide"] }],
         },
       ],
     },

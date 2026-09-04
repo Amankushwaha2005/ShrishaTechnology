@@ -41,7 +41,7 @@ function showOrder(req, res) {
       ? paymentsService.computeAdvanceInr(totalInr)
       : Math.floor(Number(q.amount) || 0);
 
-  renderWithLayout(res, "pages/order", { key: "order", title: "Place Order & Pay | #TechWithAman" }, {
+  renderWithLayout(res, "pages/order", { key: "order", title: "Place Order & Pay | Shrisha Technology" }, {
     orderPrefill: {
       service: typeof q.service === "string" ? q.service : "",
       plan: typeof q.plan === "string" ? q.plan : "",
@@ -63,7 +63,7 @@ async function showOrderSuccess(req, res) {
   renderWithLayout(
     res,
     "pages/order-success",
-    { key: "order-success", title: "Order Confirmed | #TechWithAman" },
+    { key: "order-success", title: "Order Confirmed | Shrisha Technology" },
     {
       order,
       receipt,
@@ -83,7 +83,7 @@ async function showPayAdvance(req, res) {
   renderWithLayout(
     res,
     "pages/order-pay-advance",
-    { key: "order-pay-advance", title: "Pay Advance | #TechWithAman" },
+    { key: "order-pay-advance", title: "Pay Advance | Shrisha Technology" },
     {
       order,
       canPay,
@@ -105,7 +105,7 @@ async function showPayBalance(req, res) {
   renderWithLayout(
     res,
     "pages/order-pay-balance",
-    { key: "order-pay-balance", title: "Pay Balance | #TechWithAman" },
+    { key: "order-pay-balance", title: "Pay Balance | Shrisha Technology" },
     {
       order,
       balanceDue,
@@ -126,7 +126,7 @@ async function showBalanceSuccess(req, res) {
   renderWithLayout(
     res,
     "pages/order-balance-success",
-    { key: "order-balance-success", title: "Payment Complete | #TechWithAman" },
+    { key: "order-balance-success", title: "Payment Complete | Shrisha Technology" },
     { order, receipt },
   );
 }

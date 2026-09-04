@@ -4,32 +4,32 @@
    File: views/pages/portfolio.ejs
    Project showcase grid and filters
    ============================================================================= %>
-<%- include("../partials/head", { page }) %>
-<%- include("../partials/navbar", { navItems, brand, page }) %>
-
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <span class="chip">Portfolio</span>
-        <h1>Recent Work & Delivered Projects</h1>
-        <p>Selected client and student work by #TechWithAman.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div id="portfolio-grid" class="portfolio-grid grid three"></div>
-      </div>
-    </section>
-  </main>
-
-  <div id="portfolio-detail-modal" class="home-detail-modal" hidden role="dialog" aria-modal="true" aria-labelledby="portfolio-detail-title">
-    <div class="portfolio-detail-backdrop home-detail-backdrop"></div>
-    <div class="home-detail-dialog">
-      <button type="button" class="portfolio-detail-close home-detail-close" aria-label="Close">×</button>
-      <div id="portfolio-detail-body"></div>
-    </div>
-  </div>
-
-<%- include("../partials/footer", { brand, year }) %>
-<%- include("../partials/scripts") %>
+<%- include("../partials/head", { page }) %>
+<%- include("../partials/navbar", { navItems, brand, page }) %>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Portfolio</span>
+        <h1>Recent Work & Delivered Projects</h1>
+        <p>Selected client and student work by Shrisha Technology.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="portfolio-grid" class="portfolio-grid grid three"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="portfolio-detail-modal" class="home-detail-modal" hidden role="dialog" aria-modal="true" aria-labelledby="portfolio-detail-title">
+    <div class="portfolio-detail-backdrop home-detail-backdrop"></div>
+    <div class="home-detail-dialog">
+      <button type="button" class="portfolio-detail-close home-detail-close" aria-label="Close">×</button>
+      <div id="portfolio-detail-body"></div>
+    </div>
+  </div>
+
+<%- include("../partials/footer", { brand, year }) %>
+<%- include("../partials/scripts") %>

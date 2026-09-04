@@ -8,16 +8,16 @@ Login & signup pages use **Google OAuth**. Without keys you will see: *"Google l
 2. Create or select a project
 3. **APIs & Services** → **OAuth consent screen**
    - User type: **External** (or Internal for Workspace)
-   - App name: `TechWithAman`
+   - App name: `Shrisha Technology`
    - Add your email as developer / test user if app is in **Testing**
 4. **APIs & Services** → **Credentials** → **Create Credentials** → **OAuth client ID**
 5. Application type: **Web application**
 6. **Authorized JavaScript origins** (add both):
    - `https://techwithaman-website-2026.onrender.com`
-   - `http://127.0.0.1:3000` (local dev)
-7. **Authorized redirect URIs** (must match exactly):
+   - `http://localhost:3000` (local dev)
+7. **Authorized redirect URIs** (must match exactly, then click **Save**):
    - `https://techwithaman-website-2026.onrender.com/auth/google/callback`
-   - `http://127.0.0.1:3000/auth/google/callback` (local dev)
+   - `http://localhost:3000/auth/google/callback` (local dev)
 8. Copy **Client ID** and **Client secret**
 
 ## Step 2 — Render Environment
@@ -39,8 +39,8 @@ Login & signup pages use **Google OAuth**. Without keys you will see: *"Google l
 ```env
 GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-secret
-GOOGLE_REDIRECT_URI=http://127.0.0.1:3000/auth/google/callback
-BASE_URL=http://127.0.0.1:3000
+GOOGLE_REDIRECT_URI=http://localhost:3000/auth/google/callback
+BASE_URL=http://localhost:3000
 ```
 
 ## Step 4 — Test
@@ -56,6 +56,7 @@ Should show `"googleLoginEnabled": true`
 
 | Error | Fix |
 |-------|-----|
-| `redirect_uri_mismatch` | Redirect URI in Google Console must **exactly** match `GOOGLE_REDIRECT_URI` |
+| `redirect_uri_mismatch` | Redirect URI in Google Console must **exactly** match `http://localhost:3000/auth/google/callback` then **Save** |
+| `deleted_client` | OAuth client was deleted — create a new Web client and update `.env` |
 | `access_denied` | Add your Gmail under OAuth consent screen → **Test users** |
 | Still "not configured" | Redeploy after saving env vars on Render |

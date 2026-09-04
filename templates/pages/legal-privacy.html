@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="legal-page">
+    <section class="page-hero">
+      <div class="container">
+        <span class="chip">Legal</span>
+        <h1>Client data remains private</h1>
+        <p>How {{ brand }} uses the information you share with us. Last updated: 4 September 2026.</p>
+      </div>
+    </section>
+    <section class="section legal-section">
+      <div class="container legal-layout">
+        {% include "partials/legal-toc.html" %}
+        <article class="legal-card card">
+          <h2>Client data remains private</h2>
+          <p>
+            We use your details only to quote, build, bill, and support your project. We do not sell your personal data.
+          </p>
+          <ul>
+            <li>What we may store: name, email, phone, messages, order IDs, and files you upload or send.</li>
+            <li>Login and Google sign-in data is used to keep you signed in on this website.</li>
+            <li>Payment card numbers are handled by the payment provider, not stored on our servers.</li>
+            <li>Hosting, email, or analytics tools we use may process data as needed to run the site — only for this business.</li>
+            <li>You can ask us to update or delete your enquiry records by contacting us. We may keep invoices as required by tax law.</li>
+          </ul>
+          <p>Do not send Aadhaar, full card numbers, or other sensitive IDs unless we specifically ask for a KYC step.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+{% endblock %}

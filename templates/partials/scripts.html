@@ -1,11 +1,16 @@
   {% include "partials/whatsapp-float.html" %}
   {% include "partials/ai-chat.html" %}
   {% include "partials/form-toast.html" %}
-  {% if recaptchaSiteKey %}
+  <script src="/campaign-site.js"></script>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  {% if page and (page.key == 'login' or page.key == 'signup') %}
+  <script>window.GOOGLE_CLIENT_ID = "{{ googleClientId|default('') }}";</script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="/google-login.js" defer></script>
   {% endif %}
   <script src="/main.js"></script>
   <script src="/form-toast.js"></script>
+  <script src="/form-captcha.js"></script>
   <script src="/whatsapp-float.js"></script>
   <script src="/ai-chat.js"></script>
   {% if page and page.key == 'pricing' %}
@@ -28,10 +33,15 @@
   {% if page and page.key == 'home' %}
   <script src="/home-data.js"></script>
   <script src="/home-page.js"></script>
+  <script src="/track-order.js"></script>
   {% endif %}
   {% if page and page.key == 'portfolio' %}
   <script src="/portfolio-data.js"></script>
   <script src="/portfolio-page.js"></script>
+  {% endif %}
+  {% if page and page.key == 'news' %}
+  <script src="/news-data.js"></script>
+  <script src="/news-page.js"></script>
   {% endif %}
   {% if page and page.key == 'work' %}
   <script src="/work-page.js" defer></script>

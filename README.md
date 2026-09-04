@@ -1,11 +1,11 @@
-# TechWithAman Website
+# Shrisha Technology Website
 
-A full-stack web application built with **Flask (Python)** and **PostgreSQL**, with server-rendered pages (Jinja2 templates), user authentication, admin dashboard, and Razorpay payments.
+A full-stack web application built with **Java (Spring Boot)** and **PostgreSQL**, with server-rendered pages (Jinja2 templates), user authentication, admin dashboard, and Razorpay payments.
 
 ## 🌟 Features
 
 - **User Authentication**: Secure login/registration system with bcrypt password hashing
-- **Session Management**: Flask session-based user session handling
+- **Session Management**: HTTP session-based user session handling
 - **Database**: PostgreSQL for persistent data storage
 - **Template Engine**: Jinja2 for dynamic server-side rendering
 - **Admin Tools**: Grant admin privileges to users via command-line scripts
@@ -15,13 +15,12 @@ A full-stack web application built with **Flask (Python)** and **PostgreSQL**, w
 
 | Technology | Purpose | Version |
 |------------|---------|---------|
-| **Python** | Runtime | 3.12+ |
-| **Flask** | Web framework | 3.x |
-| **Jinja2** | Template engine | 3.x |
+| **Java** | Runtime | 21+ |
+| **Spring Boot** | Web framework | 3.4 |
+| **Jinjava** | Template engine | 2.7 |
 | **PostgreSQL** | Database | 14+ |
-| **psycopg** | PostgreSQL client | 3.x |
-| **bcrypt** | Password hashing | 4.x |
-| **gunicorn** | Production server | 22.x |
+| **JDBC / HikariCP** | PostgreSQL client | — |
+| **BCrypt** | Password hashing | Spring Security Crypto |
 
 ### Language Composition
 - **JavaScript**: 36.9%
@@ -32,21 +31,23 @@ A full-stack web application built with **Flask (Python)** and **PostgreSQL**, w
 
 ## 📋 Prerequisites
 
-- Python 3.12+ (local)
+- Java 21+ (local)
+- Apache Maven 3.9+ (or the portable copy in `.tools/`)
 - PostgreSQL 14+ (local)
 
 ## 🚀 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Amankushwaha2005/techwithaman-website.git
-   cd techwithaman-website
+   git clone https://github.com/Amankushwaha2005/techwithaman-website.git shrisha-technology
+   cd shrisha-technology
    ```
 
-2. **Install dependencies**
+2. **Install Java 21+ and Maven**, then from the project root:
    ```bash
-   pip install -r requirements.txt
+   mvn -f backend/pom.xml spring-boot:run
    ```
+   Or double-click `START-SITE.bat`.
 
 3. **Install and start PostgreSQL**, then create a database:
    ```bash
@@ -62,7 +63,7 @@ A full-stack web application built with **Flask (Python)** and **PostgreSQL**, w
 
 5. **Start the application**
    ```bash
-   python -m pybackend.app
+   mvn -f backend/pom.xml spring-boot:run
    ```
 
 The server will start and be available at `http://localhost:3000` (or your configured port).
@@ -80,7 +81,7 @@ The server will start and be available at `http://localhost:3000` (or your confi
 ## 📁 Project Structure
 
 ```
-techwithaman-website/
+shrisha-technology/
 ├── server.js              # Main application entry point
 ├── package.json           # Project dependencies and scripts
 ├── public/                # Static assets (CSS, images, client-side JS)
@@ -107,7 +108,7 @@ techwithaman-website/
 The application uses **PostgreSQL**:
 - **Client**: `pg` (node-postgres)
 - **Config**: `DATABASE_URL` or `PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE` in `.env`
-- **Schema**: Tables are created automatically on first `npm start` (`npm run db:init` to run migrations only)
+# Schema is created automatically when the Java server starts.
 - **GUI**: pgAdmin, DBeaver, or any PostgreSQL client (not MySQL Workbench)
 
 ## 🔧 Configuration

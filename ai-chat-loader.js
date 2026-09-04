@@ -36,7 +36,7 @@
         <div class="twa-ai-chat__head-info">
           <span class="twa-ai-chat__avatar" aria-hidden="true">${aiIconSvg}</span>
           <div>
-            <h2 id="twa-ai-chat-title" class="twa-ai-chat__title">#TechWithAman Assistant</h2>
+            <h2 id="twa-ai-chat-title" class="twa-ai-chat__title">Shrisha Technology Assistant</h2>
             <p class="twa-ai-chat__status" id="twa-ai-chat-status">Ask about services, pricing & projects</p>
           </div>
         </div>
@@ -47,7 +47,7 @@
         <input id="twa-ai-chat-input" type="text" placeholder="Ask about website, app, logo, student project…" maxlength="2000" aria-label="Your question" />
         <button type="submit" class="twa-ai-chat__send" aria-label="Send">➤</button>
       </form>
-      <p class="twa-ai-chat__foot">Human help: <a href="contact.html">Contact</a> · WhatsApp +91 78170 85910</p>
+      <p class="twa-ai-chat__foot">Human help: <a href="contact.html">Contact</a></p>
     </div>
   </div>`;
 

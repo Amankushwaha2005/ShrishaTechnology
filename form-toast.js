@@ -34,7 +34,7 @@
     signup: {
       type: "success",
       title: "Account created!",
-      text: "Your account was created successfully. Welcome to TechWithAman!",
+      text: "Your account was created successfully. Welcome to Shrisha Technology!",
     },
   };
 
@@ -66,7 +66,7 @@
   root.innerHTML =
     '<div class="form-toast form-toast--' +
     payload.type +
-    '" role="alert">' +
+    '" role="dialog" aria-modal="true">' +
     '<span class="form-toast__icon">' +
     icon +
     "</span>" +
@@ -81,14 +81,19 @@
     '<button type="button" class="form-toast__close" aria-label="Dismiss">&times;</button>' +
     "</div>";
   root.hidden = false;
+  document.body.classList.add("form-toast-open");
 
   function dismiss() {
     root.hidden = true;
     root.innerHTML = "";
+    document.body.classList.remove("form-toast-open");
   }
 
   root.querySelector(".form-toast__close").addEventListener("click", dismiss);
-  window.setTimeout(dismiss, 7000);
+  root.addEventListener("click", function (event) {
+    if (event.target === root) dismiss();
+  });
+  window.setTimeout(dismiss, 8000);
 
   if (sent || toast || error) {
     params.delete("sent");

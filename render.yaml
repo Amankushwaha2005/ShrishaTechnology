@@ -1,5 +1,6 @@
-# Render Blueprint — https://dashboard.render.com/blueprints
+# Render Blueprint — Shrisha Technology
 # Repo: https://github.com/Amankushwaha2005/techwithaman-website
+# Keep existing Render service/database names so the live deploy is not recreated.
 
 databases:
   - name: techwithaman-db
@@ -11,19 +12,17 @@ databases:
 services:
   - type: web
     name: techwithaman-website
-    runtime: python
+    runtime: java
     plan: free
     region: singapore
     branch: main
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn pybackend.wsgi:app --bind 0.0.0.0:$PORT
+    buildCommand: mvn -f backend/pom.xml -DskipTests package
+    startCommand: java -jar backend/target/shrisha-technology-1.0.0.jar
     healthCheckPath: /health
     autoDeploy: true
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.12.4
-      - key: FLASK_ENV
-        value: production
+      - key: JAVA_VERSION
+        value: 21
       - key: DATABASE_URL
         fromDatabase:
           name: techwithaman-db

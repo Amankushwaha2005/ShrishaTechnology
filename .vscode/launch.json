@@ -2,17 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Start TechWithAman server",
-      "type": "node",
+      "name": "Start Shrisha Technology server",
+      "type": "java",
       "request": "launch",
-      "program": "${workspaceFolder}/server.js",
-      "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal",
-      "serverReadyAction": {
-        "pattern": "Server running",
-        "uriFormat": "http://127.0.0.1:3000/",
-        "action": "openExternally"
-      }
+      "mainClass": "com.shrishatechnology.Application",
+      "projectName": "shrisha-technology",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

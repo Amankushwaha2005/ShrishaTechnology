@@ -6,13 +6,13 @@
  * =============================================================================
  */
 
-const brand = "#TechWithAman";
+const brand = "Shrisha Technology";
 
 const company = {
-  name: "#TechWithAman",
-  tagline: "Websites · Apps · Logo Design · Student Projects",
+  name: "Shrisha Technology",
+  tagline: "Websites · Apps · SEO & GEO · Student Projects",
   email: "mayankklush2006@gmail.com",
-  phone: "+91 78170 85910",
+  phone: "+91 79920 20591",
 };
 
 const navItems = [

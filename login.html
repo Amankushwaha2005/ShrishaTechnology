@@ -1,154 +1,154 @@
-<!-- =============================================================================
-     STATIC HTML — LOGIN
-     URL: /login
-     File: login.html
-     Legacy static login page
-     ============================================================================= -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | #TechWithAman</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="login-page">
-    <section class="login-shell" aria-label="Login card">
-      <article class="login-card">
-        <div class="login-left">
-          <h1>Welcome to TechWithAman</h1>
-          <p class="login-subtitle">Login to your account</p>
-          <p class="login-helper">Choose your preferred social account for instant access</p>
-          <p id="authMessage" class="auth-error" style="display:none;"></p>
-
-          <div class="login-social-list">
-            <a class="login-social-btn" href="/auth/google" aria-label="Continue with Google">
-              <span class="social-icon social-icon-google" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <path fill="#EA4335" d="M12 11.2v3.9h5.5c-.2 1.3-1.5 3.8-5.5 3.8-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 4.4 14.6 3.5 12 3.5A8.5 8.5 0 1 0 12 20.5c4.9 0 8.1-3.4 8.1-8.2 0-.6-.1-1-.2-1.1H12Z"/>
-                  <path fill="#4285F4" d="M20.1 12.3c0-.6-.1-1-.2-1.1H12v3.9h5.5c-.3 1.4-1.1 2.5-2.3 3.2l3 2.3c1.8-1.7 2.9-4.1 2.9-8.3Z"/>
-                  <path fill="#FBBC05" d="M6 14.9A5.9 5.9 0 0 1 5.7 13c0-.7.1-1.3.3-1.9L3 8.8A8.4 8.4 0 0 0 3 17.2L6 14.9Z"/>
-                  <path fill="#34A853" d="M12 20.5c2.6 0 4.8-.9 6.4-2.4l-3-2.3c-.8.5-1.9.9-3.4.9-2.6 0-4.9-1.8-5.7-4.2l-3 2.3A8.5 8.5 0 0 0 12 20.5Z"/>
-                </svg>
-              </span>
-              Continue with Google
-            </a>
-            <a class="login-social-btn" href="/auth/google" aria-label="Continue with GitHub">
-              <span class="social-icon social-icon-github" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <path fill="currentColor" d="M12 .5C5.73.5.75 5.7.75 12.2c0 5.2 3.44 9.6 8.2 11.17.6.12.82-.27.82-.6v-2.1c-3.33.75-4.03-1.66-4.03-1.66-.55-1.43-1.34-1.8-1.34-1.8-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.3 1.86 1.3 1.08 1.9 2.83 1.35 3.52 1.03.11-.81.42-1.35.76-1.66-2.66-.32-5.46-1.38-5.46-6.14 0-1.36.46-2.47 1.22-3.34-.12-.32-.53-1.6.12-3.33 0 0 1-.33 3.3 1.27.96-.28 1.99-.42 3.02-.42 1.03 0 2.06.14 3.02.42 2.3-1.6 3.3-1.27 3.3-1.27.65 1.73.24 3.01.12 3.33.76.87 1.22 1.98 1.22 3.34 0 4.78-2.8 5.81-5.48 6.13.43.38.82 1.12.82 2.27v3.36c0 .33.22.73.83.6 4.75-1.58 8.18-5.97 8.18-11.16C23.25 5.7 18.27.5 12 .5z"/>
-                </svg>
-              </span>
-              Continue with GitHub
-            </a>
-            <a class="login-social-btn" href="/auth/google" aria-label="Continue with Microsoft">
-              <span class="social-icon social-icon-microsoft" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  <rect x="3" y="3" width="8" height="8" fill="#F25022"/>
-                  <rect x="13" y="3" width="8" height="8" fill="#7FBA00"/>
-                  <rect x="3" y="13" width="8" height="8" fill="#00A4EF"/>
-                  <rect x="13" y="13" width="8" height="8" fill="#FFB900"/>
-                </svg>
-              </span>
-              Continue with Microsoft
-            </a>
-          </div>
-
-          <div class="login-divider"><span>Or</span></div>
-
-          <details class="login-email-block">
-            <summary>Continue via Email</summary>
-            <form class="auth-form" action="/auth/login" method="post">
-              <input class="auth-input" type="email" name="email" placeholder="Email" required>
-              <input class="auth-input" type="password" name="password" placeholder="Password" required>
-              <button class="btn auth-submit" type="submit">Login</button>
-            </form>
-          </details>
-        </div>
-
-        <div class="login-right" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80" alt="Developer coding on laptop" loading="lazy">
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li>Website Development</li>
-          <li>App Development</li>
-          <li>Logo Design</li>
-          <li>Student Projects</li>
-          <li><a href="work.html">Work With Us</a></li>
-          <li>Maintenance Support</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul>
-          <li>Terms & Conditions Apply</li>
-          <li>Advance Payment Required</li>
-          <li>No Refund After Delivery</li>
-          <li>Project Timeline as Agreed</li>
-          <li>Client Data Remains Private</li>
-        </ul>
-      </div>
-      <div class="social-links">
-        <h4>Social</h4>
-        <ul>
-          <li>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.75 5.7.75 12.2c0 5.2 3.44 9.6 8.2 11.17.6.12.82-.27.82-.6v-2.1c-3.33.75-4.03-1.66-4.03-1.66-.55-1.43-1.34-1.8-1.34-1.8-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.3 1.86 1.3 1.08 1.9 2.83 1.35 3.52 1.03.11-.81.42-1.35.76-1.66-2.66-.32-5.46-1.38-5.46-6.14 0-1.36.46-2.47 1.22-3.34-.12-.32-.53-1.6.12-3.33 0 0 1-.33 3.3 1.27.96-.28 1.99-.42 3.02-.42 1.03 0 2.06.14 3.02.42 2.3-1.6 3.3-1.27 3.3-1.27.65 1.73.24 3.01.12 3.33.76.87 1.22 1.98 1.22 3.34 0 4.78-2.8 5.81-5.48 6.13.43.38.82 1.12.82 2.27v3.36c0 .33.22.73.83.6 4.75-1.58 8.18-5.97 8.18-11.16C23.25 5.7 18.27.5 12 .5z"/></svg>
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.5 22h-6.9l-5.4-7.3L4.7 22H1.5l7.3-8.4L.9 2h7.1l4.9 6.6L18.9 2Zm-1.2 18h1.7L7 3.9H5.2l12.5 16.1Z"/></svg>
-              Twitter (X)
-            </a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.9-2.5c-.9-1-1.9-1-2.4-1.1C16.8 2.3 12 2.3 12 2.3h0s-4.8 0-8.2.3c-.5.1-1.5.1-2.4 1.1C.7 4.5.5 6.2.5 6.2S.2 8.3.2 10.4v1.9c0 2.1.3 4.2.3 4.2s.2 1.7.9 2.5c.9 1 2.1 1 2.6 1.1 1.9.2 8 .3 8 .3s4.8 0 8.2-.3c.5-.1 1.5-.1 2.4-1.1.7-.8.9-2.5.9-2.5s.3-2.1.3-4.2v-1.9c0-2.1-.3-4.2-.3-4.2ZM9.7 14.7V7.9l6.5 3.4-6.5 3.4Z"/></svg>
-              YouTube
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.8 22v-8.4h2.8l.4-3.3h-3.2V8.2c0-.9.3-1.6 1.6-1.6h1.7V3.7c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.9v2.7H7v3.3h2.9V22h3.9Z"/></svg>
-              Facebook
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-row">
-      <p>&copy; 2026 #TechWithAman</p>
-      <p style="color: #fff;">Contact: <a href="tel:+917817085910" style="color: #fff;">+91 7817085910</a></p>
-    </div>
-  </footer>
-
-  <script src="whatsapp-float.js"></script>
-  <script src="ai-chat-loader.js"></script>
-  <script src="main.js"></script>
-</body>
-</html>
-
+<!-- =============================================================================
+     STATIC HTML — LOGIN
+     URL: /login
+     File: login.html
+     Legacy static login page
+     ============================================================================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Shrisha Technology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-shell" aria-label="Login card">
+      <article class="login-card">
+        <div class="login-left">
+          <h1>Welcome to Shrisha Technology</h1>
+          <p class="login-subtitle">Login to your account</p>
+          <p class="login-helper">Choose your preferred social account for instant access</p>
+          <p id="authMessage" class="auth-error" style="display:none;"></p>
+
+          <div class="login-social-list">
+            <a class="login-social-btn" href="/auth/google" aria-label="Continue with Google">
+              <span class="social-icon social-icon-google" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path fill="#EA4335" d="M12 11.2v3.9h5.5c-.2 1.3-1.5 3.8-5.5 3.8-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 4.4 14.6 3.5 12 3.5A8.5 8.5 0 1 0 12 20.5c4.9 0 8.1-3.4 8.1-8.2 0-.6-.1-1-.2-1.1H12Z"/>
+                  <path fill="#4285F4" d="M20.1 12.3c0-.6-.1-1-.2-1.1H12v3.9h5.5c-.3 1.4-1.1 2.5-2.3 3.2l3 2.3c1.8-1.7 2.9-4.1 2.9-8.3Z"/>
+                  <path fill="#FBBC05" d="M6 14.9A5.9 5.9 0 0 1 5.7 13c0-.7.1-1.3.3-1.9L3 8.8A8.4 8.4 0 0 0 3 17.2L6 14.9Z"/>
+                  <path fill="#34A853" d="M12 20.5c2.6 0 4.8-.9 6.4-2.4l-3-2.3c-.8.5-1.9.9-3.4.9-2.6 0-4.9-1.8-5.7-4.2l-3 2.3A8.5 8.5 0 0 0 12 20.5Z"/>
+                </svg>
+              </span>
+              Continue with Google
+            </a>
+            <a class="login-social-btn" href="/auth/google" aria-label="Continue with GitHub">
+              <span class="social-icon social-icon-github" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path fill="currentColor" d="M12 .5C5.73.5.75 5.7.75 12.2c0 5.2 3.44 9.6 8.2 11.17.6.12.82-.27.82-.6v-2.1c-3.33.75-4.03-1.66-4.03-1.66-.55-1.43-1.34-1.8-1.34-1.8-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.3 1.86 1.3 1.08 1.9 2.83 1.35 3.52 1.03.11-.81.42-1.35.76-1.66-2.66-.32-5.46-1.38-5.46-6.14 0-1.36.46-2.47 1.22-3.34-.12-.32-.53-1.6.12-3.33 0 0 1-.33 3.3 1.27.96-.28 1.99-.42 3.02-.42 1.03 0 2.06.14 3.02.42 2.3-1.6 3.3-1.27 3.3-1.27.65 1.73.24 3.01.12 3.33.76.87 1.22 1.98 1.22 3.34 0 4.78-2.8 5.81-5.48 6.13.43.38.82 1.12.82 2.27v3.36c0 .33.22.73.83.6 4.75-1.58 8.18-5.97 8.18-11.16C23.25 5.7 18.27.5 12 .5z"/>
+                </svg>
+              </span>
+              Continue with GitHub
+            </a>
+            <a class="login-social-btn" href="/auth/google" aria-label="Continue with Microsoft">
+              <span class="social-icon social-icon-microsoft" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <rect x="3" y="3" width="8" height="8" fill="#F25022"/>
+                  <rect x="13" y="3" width="8" height="8" fill="#7FBA00"/>
+                  <rect x="3" y="13" width="8" height="8" fill="#00A4EF"/>
+                  <rect x="13" y="13" width="8" height="8" fill="#FFB900"/>
+                </svg>
+              </span>
+              Continue with Microsoft
+            </a>
+          </div>
+
+          <div class="login-divider"><span>Or</span></div>
+
+          <details class="login-email-block">
+            <summary>Continue via Email</summary>
+            <form class="auth-form" action="/auth/login" method="post">
+              <input class="auth-input" type="email" name="email" placeholder="Email" required>
+              <input class="auth-input" type="password" name="password" placeholder="Password" required>
+              <button class="btn auth-submit" type="submit">Login</button>
+            </form>
+          </details>
+        </div>
+
+        <div class="login-right" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80" alt="Developer coding on laptop" loading="lazy">
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li>Website Development</li>
+          <li>App Development</li>
+          <li>Logo Design</li>
+          <li>Student Projects</li>
+          <li><a href="work.html">Work With Us</a></li>
+          <li>Maintenance Support</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li>Terms & Conditions Apply</li>
+          <li>Advance Payment Required</li>
+          <li>No Refund After Delivery</li>
+          <li>Project Timeline as Agreed</li>
+          <li>Client Data Remains Private</li>
+        </ul>
+      </div>
+      <div class="social-links">
+        <h4>Social</h4>
+        <ul>
+          <li>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.75 5.7.75 12.2c0 5.2 3.44 9.6 8.2 11.17.6.12.82-.27.82-.6v-2.1c-3.33.75-4.03-1.66-4.03-1.66-.55-1.43-1.34-1.8-1.34-1.8-1.1-.78.08-.77.08-.77 1.22.09 1.86 1.3 1.86 1.3 1.08 1.9 2.83 1.35 3.52 1.03.11-.81.42-1.35.76-1.66-2.66-.32-5.46-1.38-5.46-6.14 0-1.36.46-2.47 1.22-3.34-.12-.32-.53-1.6.12-3.33 0 0 1-.33 3.3 1.27.96-.28 1.99-.42 3.02-.42 1.03 0 2.06.14 3.02.42 2.3-1.6 3.3-1.27 3.3-1.27.65 1.73.24 3.01.12 3.33.76.87 1.22 1.98 1.22 3.34 0 4.78-2.8 5.81-5.48 6.13.43.38.82 1.12.82 2.27v3.36c0 .33.22.73.83.6 4.75-1.58 8.18-5.97 8.18-11.16C23.25 5.7 18.27.5 12 .5z"/></svg>
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.5 22h-6.9l-5.4-7.3L4.7 22H1.5l7.3-8.4L.9 2h7.1l4.9 6.6L18.9 2Zm-1.2 18h1.7L7 3.9H5.2l12.5 16.1Z"/></svg>
+              Twitter (X)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2s-.2-1.7-.9-2.5c-.9-1-1.9-1-2.4-1.1C16.8 2.3 12 2.3 12 2.3h0s-4.8 0-8.2.3c-.5.1-1.5.1-2.4 1.1C.7 4.5.5 6.2.5 6.2S.2 8.3.2 10.4v1.9c0 2.1.3 4.2.3 4.2s.2 1.7.9 2.5c.9 1 2.1 1 2.6 1.1 1.9.2 8 .3 8 .3s4.8 0 8.2-.3c.5-.1 1.5-.1 2.4-1.1.7-.8.9-2.5.9-2.5s.3-2.1.3-4.2v-1.9c0-2.1-.3-4.2-.3-4.2ZM9.7 14.7V7.9l6.5 3.4-6.5 3.4Z"/></svg>
+              YouTube
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.8 22v-8.4h2.8l.4-3.3h-3.2V8.2c0-.9.3-1.6 1.6-1.6h1.7V3.7c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.9v2.7H7v3.3h2.9V22h3.9Z"/></svg>
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-row">
+      <p>&copy; 2026 Shrisha Technology</p>
+      <p style="color: #fff;">Contact: <a href="tel:+917992020591" style="color: #fff;">+91 7992020591</a></p>
+    </div>
+  </footer>
+
+  <script src="whatsapp-float.js"></script>
+  <script src="ai-chat-loader.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
+

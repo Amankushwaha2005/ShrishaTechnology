@@ -13,12 +13,20 @@
 <body class="admin-body">
   <div class="admin-app">
     <aside class="admin-sidebar" aria-label="Admin navigation">
-      <a class="admin-brand" href="/admin">{{ brand }}</a>
+      <a class="admin-brand" href="/admin" aria-label="ShrishaTechnology">
+        <img src="/images/logo.png" alt="" class="admin-brand__logo" width="40" height="40">
+        <span class="admin-brand__text">ShrishaTechnology</span>
+      </a>
       <p class="admin-sidebar-tag">Control center</p>
       <nav class="admin-side-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/campaigns">Campaigns &amp; media</a>
         <a href="#overview">Overview</a>
         <a href="#activity">Activity chart</a>
         <a href="#inbox-orders">Payments &amp; orders</a>
+        <a href="#inbox-contact">Contact inbox</a>
+        <a href="#inbox-chat">Chatbot messages</a>
+        <a href="#inbox-work">Work applications</a>
         <a href="#users">Users</a>
       </nav>
       <div class="admin-sidebar-foot">
@@ -39,12 +47,33 @@
         <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
           <span class="theme-icon" aria-hidden="true">
             <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 14.5a8.5 8.5 0 0 1-11.6-11A9.5 9.5 0 1 0 21 14.5Z"/></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11h1a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2Zm17 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM5.6 4.2a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4Zm10.7 10.7a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4ZM18.4 4.2a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM7.7 14.9a1 1 0 0 1 0 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0Z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 1 1 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11h1a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2Zm17 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM5.6 4.2a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4Zm10.7 10.7a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4ZM18.4 4.2a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM7.7 14.9a1 1 0 0 1 0 1.4l-.7.7a1 1 0 1 1-1.4 1.4l.7-.7a1 1 0 0 1 1.4 0Z"/></svg>
           </span>
         </button>
       </header>
 
       <div class="admin-content">
+        {% if flash == 'roleupdated' %}
+          <p class="admin-flash admin-flash-ok" role="status">User role updated.</p>
+        {% elif flash == 'delivered' %}
+          <p class="admin-flash admin-flash-ok" role="status">Project marked as delivered — client can pay balance now.</p>
+        {% elif flash == 'advancepaid' %}
+          <p class="admin-flash admin-flash-ok" role="status">Advance marked as paid.</p>
+        {% elif flash == 'orderdeleted' %}
+          <p class="admin-flash admin-flash-ok" role="status">Order deleted.</p>
+        {% endif %}
+        {% if err == 'invalid' %}
+          <p class="admin-flash admin-flash-err" role="alert">That action was not valid.</p>
+        {% elif err == 'selfdemote' %}
+          <p class="admin-flash admin-flash-err" role="alert">You cannot remove your own admin role.</p>
+        {% elif err == 'notready' %}
+          <p class="admin-flash admin-flash-err" role="alert">Only advance-paid orders can be marked delivered.</p>
+        {% elif err == 'nobalance' %}
+          <p class="admin-flash admin-flash-err" role="alert">This order has no remaining balance to collect.</p>
+        {% elif err %}
+          <p class="admin-flash admin-flash-err" role="alert">{{ err }}</p>
+        {% endif %}
+
         <section class="admin-section" id="overview">
           <h2 class="admin-h2">Overview</h2>
           <div class="admin-kpi-grid">
@@ -78,6 +107,11 @@
               <strong class="admin-kpi-value">₹{{ stats.revenuePaid }}</strong>
               <span class="admin-kpi-meta">{{ stats.ordersBalanceDue }} awaiting balance payment</span>
             </article>
+            <article class="admin-kpi">
+              <span class="admin-kpi-label">Pipeline</span>
+              <strong class="admin-kpi-value">{{ stats.pipeline }}</strong>
+              <span class="admin-kpi-meta">Open items</span>
+            </article>
           </div>
         </section>
 
@@ -90,6 +124,7 @@
 
         <section class="admin-section" id="inbox-orders">
           <h2 class="admin-h2">Payments &amp; orders</h2>
+          <p class="admin-section-desc">Mark a project delivered to unlock the client’s balance payment link.</p>
           <div class="admin-table-wrap">
             <table class="admin-table">
               <thead>
@@ -103,21 +138,189 @@
                   <th>Advance</th>
                   <th>Balance</th>
                   <th>Total</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {% for o in orders %}
                   <tr>
                     <td>{{ o.id }}</td>
-                    <td>{{ o.created_at }}</td>
-                    <td>{{ o.status }}</td>
-                    <td><code>{{ o.public_id }}</code></td>
-                    <td>{{ o.name }}<br><small>{{ o.email }}</small></td>
-                    <td>{{ o.service }}<br><small>{{ o.plan }}</small></td>
+                    <td class="admin-nowrap">{{ o.whenLabel }}</td>
+                    <td>
+                      <span class="admin-pill admin-pill-{{ o.pillClass }}">{{ o.statusLabel }}</span>
+                      {% if o.delivered %}<br><span class="admin-muted">Delivered</span>{% endif %}
+                    </td>
+                    <td class="admin-nowrap"><code>{{ o.public_id }}</code></td>
+                    <td>
+                      <strong>{{ o.name }}</strong><br>
+                      <a href="mailto:{{ o.email }}">{{ o.email }}</a>
+                      {% if o.phone %}<br><span class="admin-muted">{{ o.phone }}</span>{% endif %}
+                    </td>
+                    <td>{{ o.service }}<br><span class="admin-muted">{{ o.plan }}</span></td>
                     <td>₹{{ o.advance_paid_inr or o.amount_inr }}</td>
-                    <td>₹{{ o.balance_paid_inr }}</td>
+                    <td>{% if o.isCompleted %}₹{{ o.balance_paid_inr }}{% elif o.balanceDue > 0 %}₹{{ o.balanceDue }} due{% else %}—{% endif %}</td>
                     <td>₹{{ o.total_inr }}</td>
+                    <td class="admin-order-actions">
+                      {% if o.canDeliver %}
+                        <form method="post" action="/admin/orders/{{ o.id }}/deliver" class="admin-inline-form">
+                          <button type="submit" class="btn btn-small">Mark delivered</button>
+                        </form>
+                      {% endif %}
+                      {% if o.showBalanceLink %}
+                        <a class="btn btn-small" href="/order/pay-balance?id={{ o.public_id }}" target="_blank" rel="noopener">Balance link</a>
+                      {% endif %}
+                      {% if o.isPaidLike %}
+                        <a class="btn btn-small btn-outline" href="/order/receipt?id={{ o.public_id }}" target="_blank" rel="noopener">Receipt</a>
+                      {% endif %}
+                      {% if o.isPending %}
+                        <a class="btn btn-small" href="/order/pay-advance?id={{ o.public_id }}" target="_blank" rel="noopener">Pay link</a>
+                        <form method="post" action="/admin/orders/{{ o.id }}/mark-advance-paid" class="admin-inline-form" onsubmit="return confirm('Mark advance as paid?');">
+                          <button type="submit" class="btn btn-small btn-outline">Mark paid</button>
+                        </form>
+                        <form method="post" action="/admin/orders/{{ o.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Delete this pending order?');">
+                          <button type="submit" class="btn btn-small btn-outline admin-btn-danger">Delete</button>
+                        </form>
+                      {% endif %}
+                    </td>
                   </tr>
+                {% else %}
+                  <tr><td colspan="10" class="admin-empty">No orders yet. Payments from the order page will appear here.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="inbox-contact">
+          <h2 class="admin-h2">Contact inbox</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th class="admin-th-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in contacts %}
+                  <tr>
+                    <td>{{ row.id }}</td>
+                    <td><span class="admin-pill admin-pill-{{ row.status }}">{{ row.status }}</span></td>
+                    <td>{{ row.name }}</td>
+                    <td><a href="mailto:{{ row.email }}">{{ row.email }}</a></td>
+                    <td class="admin-cell-msg">{{ row.message }}</td>
+                    <td class="admin-actions">
+                      <form method="post" action="/admin/submissions/contact/{{ row.id }}/status" class="admin-inline-form">
+                        <select name="status" class="admin-select">
+                          <option value="new" {% if row.status == 'new' %}selected{% endif %}>new</option>
+                          <option value="read" {% if row.status == 'read' %}selected{% endif %}>read</option>
+                          <option value="archived" {% if row.status == 'archived' %}selected{% endif %}>archived</option>
+                        </select>
+                        <button type="submit" class="btn btn-small">Save</button>
+                      </form>
+                      <form method="post" action="/admin/submissions/contact/{{ row.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Delete this message?');">
+                        <button type="submit" class="btn btn-small btn-danger-outline">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                {% else %}
+                  <tr><td colspan="6" class="admin-empty">No contact messages yet.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="inbox-chat">
+          <h2 class="admin-h2">Chatbot messages</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Message</th>
+                  <th>Page</th>
+                  <th class="admin-th-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in chats %}
+                  <tr>
+                    <td>{{ row.id }}</td>
+                    <td><span class="admin-pill admin-pill-{{ row.status }}">{{ row.status }}</span></td>
+                    <td class="admin-cell-msg">{{ row.message }}</td>
+                    <td class="admin-cell-page">{{ row.page_url or "—" }}</td>
+                    <td class="admin-actions">
+                      <form method="post" action="/admin/submissions/chat/{{ row.id }}/status" class="admin-inline-form">
+                        <select name="status" class="admin-select">
+                          <option value="new" {% if row.status == 'new' %}selected{% endif %}>new</option>
+                          <option value="read" {% if row.status == 'read' %}selected{% endif %}>read</option>
+                          <option value="archived" {% if row.status == 'archived' %}selected{% endif %}>archived</option>
+                        </select>
+                        <button type="submit" class="btn btn-small">Save</button>
+                      </form>
+                      <form method="post" action="/admin/submissions/chat/{{ row.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Delete this chat message?');">
+                        <button type="submit" class="btn btn-small btn-danger-outline">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                {% else %}
+                  <tr><td colspan="5" class="admin-empty">No chatbot messages yet.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section" id="inbox-work">
+          <h2 class="admin-h2">Work applications</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Skill</th>
+                  <th>Resume</th>
+                  <th class="admin-th-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in workRows %}
+                  <tr>
+                    <td>{{ row.id }}</td>
+                    <td><span class="admin-pill admin-pill-{{ row.status }}">{{ row.status }}</span></td>
+                    <td>{{ row.full_name }}</td>
+                    <td><a href="mailto:{{ row.email }}">{{ row.email }}</a></td>
+                    <td class="admin-cell-msg">{{ row.skill or "—" }}</td>
+                    <td>
+                      {% if row.resume %}
+                        <a href="{{ row.resume }}" target="_blank" rel="noopener">Link</a>
+                      {% else %}—{% endif %}
+                    </td>
+                    <td class="admin-actions">
+                      <form method="post" action="/admin/submissions/work/{{ row.id }}/status" class="admin-inline-form">
+                        <select name="status" class="admin-select">
+                          <option value="new" {% if row.status == 'new' %}selected{% endif %}>new</option>
+                          <option value="read" {% if row.status == 'read' %}selected{% endif %}>read</option>
+                          <option value="archived" {% if row.status == 'archived' %}selected{% endif %}>archived</option>
+                        </select>
+                        <button type="submit" class="btn btn-small">Save</button>
+                      </form>
+                      <form method="post" action="/admin/submissions/work/{{ row.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Delete this application?');">
+                        <button type="submit" class="btn btn-small btn-danger-outline">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                {% else %}
+                  <tr><td colspan="7" class="admin-empty">No applications yet.</td></tr>
                 {% endfor %}
               </tbody>
             </table>
@@ -131,25 +334,38 @@
               <thead>
                 <tr>
                   <th>ID</th>
+                  <th>Role</th>
+                  <th>Provider</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Role</th>
+                  <th class="admin-th-actions">Role actions</th>
                 </tr>
               </thead>
               <tbody>
                 {% for u in users %}
                   <tr>
                     <td>{{ u.id }}</td>
+                    <td><span class="admin-pill {% if u.role == 'admin' %}admin-pill-admin{% else %}admin-pill-user{% endif %}">{{ u.role }}</span></td>
+                    <td>{{ u.provider }}</td>
                     <td>{{ u.name }}</td>
                     <td>{{ u.email }}</td>
-                    <td>{{ u.role }}</td>
+                    <td class="admin-actions">
+                      <form method="post" action="/admin/users/{{ u.id }}/role" class="admin-inline-form">
+                        <select name="role" class="admin-select">
+                          <option value="user" {% if u.role == 'user' %}selected{% endif %}>user</option>
+                          <option value="admin" {% if u.role == 'admin' %}selected{% endif %}>admin</option>
+                        </select>
+                        <button type="submit" class="btn btn-small">Update</button>
+                      </form>
+                    </td>
                   </tr>
+                {% else %}
+                  <tr><td colspan="6" class="admin-empty">No users yet. Sign up first, then open /admin.</td></tr>
                 {% endfor %}
               </tbody>
             </table>
           </div>
         </section>
-
       </div>
     </div>
   </div>
@@ -157,26 +373,37 @@
   <script src="/main.js"></script>
   <script>
     (function () {
-      var ctx = document.getElementById("adminChart");
-      if (!ctx) return;
-      var labels = {{ chart.labels|tojson }};
-      var contact = {{ chart.contact|tojson }};
-      var work = {{ chart.work|tojson }};
-      var chat = {{ chart.chat|tojson }};
-      new Chart(ctx, {
+      var el = document.getElementById("adminChart");
+      if (!el || typeof Chart === "undefined") return;
+      var labels = {{ chartLabelsJson|safe }};
+      var contact = {{ chartContactJson|safe }};
+      var work = {{ chartWorkJson|safe }};
+      var orders = {{ chartOrdersJson|safe }};
+      var root = document.documentElement;
+      var muted = getComputedStyle(root).getPropertyValue("--muted").trim() || "#a8b4d7";
+      var brand = getComputedStyle(root).getPropertyValue("--brand").trim() || "#c9a227";
+      var text = getComputedStyle(root).getPropertyValue("--text").trim() || "#f3f6ff";
+      new Chart(el, {
         type: "line",
         data: {
           labels: labels,
           datasets: [
-            { label: "Contact", data: contact },
-            { label: "Work", data: work },
-            { label: "Chat", data: chat }
-          ],
+            { label: "Contact", data: contact, borderColor: brand, tension: 0.35, fill: false },
+            { label: "Work", data: work, borderColor: muted, tension: 0.35, fill: false },
+            { label: "Orders", data: orders, borderColor: "#3dd68c", tension: 0.35, fill: false }
+          ]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: text } } },
+          scales: {
+            x: { ticks: { color: muted }, grid: { color: "rgba(128,140,180,0.15)" } },
+            y: { beginAtZero: true, ticks: { color: muted, precision: 0 }, grid: { color: "rgba(128,140,180,0.15)" } }
+          }
+        }
       });
     })();
   </script>
 </body>
 </html>
-

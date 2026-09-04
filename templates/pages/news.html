@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+  <main class="news-hub">
+    <div class="news-crumb">
+      <div class="container"><a href="/">Home</a> / News Hub</div>
+    </div>
+
+    <div class="news-ticker" aria-label="Live insights">
+      <span class="news-ticker__badge"><span aria-hidden="true">🔥</span> Live Insights</span>
+      <div class="news-ticker__viewport">
+        <div id="news-ticker-track" class="news-ticker__track"></div>
+      </div>
+    </div>
+
+    <section class="news-toolbar">
+      <div class="container news-toolbar__inner">
+        <div id="news-cats" class="news-cats" role="tablist" aria-label="Insight categories"></div>
+        <div class="news-tools">
+          <label class="news-search">
+            <span class="news-search__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg>
+            </span>
+            <input id="news-search" type="search" placeholder="Search insights..." autocomplete="off">
+          </label>
+          <label class="news-sort">
+            <span class="visually-hidden">Sort</span>
+            <select id="news-sort" aria-label="Sort insights">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="title">A–Z</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="section news-hero-wrap">
+      <div class="container">
+        <div class="news-hero">
+          <p class="news-hero__kicker">Live · updated through the day</p>
+          <h1>Today’s news for India and the world</h1>
+          <p>
+            Real headlines pulled from public news feeds — India, world, business, technology,
+            sports and entertainment. The live ticker at the top keeps moving with the latest stories.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section news-feed">
+      <div class="container">
+        <article id="news-featured" class="news-featured" hidden></article>
+        <div id="news-grid" class="news-grid"></div>
+        <p id="news-empty" class="news-empty" hidden>No insights match your search.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="news-modal" class="home-detail-modal" hidden role="dialog" aria-modal="true" aria-labelledby="news-modal-title">
+    <div class="news-modal-backdrop home-detail-backdrop"></div>
+    <div class="home-detail-dialog news-modal-dialog">
+      <button type="button" class="home-detail-close" id="news-modal-close" aria-label="Close">×</button>
+      <div id="news-modal-body"></div>
+    </div>
+  </div>
+{% endblock %}

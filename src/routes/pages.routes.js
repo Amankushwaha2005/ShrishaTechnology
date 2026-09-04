@@ -12,21 +12,21 @@ const { renderPage } = require("../controllers/pages.controller");
 
 const router = express.Router();
 
-router.get("/", (req, res) => renderPage(req, res, "pages/index", { key: "home", title: "#TechWithAman" }));
+router.get("/", (req, res) => renderPage(req, res, "pages/index", { key: "home", title: "Shrisha Technology" }));
 router.get("/pricing", (req, res) =>
-  renderPage(req, res, "pages/pricing", { key: "pricing", title: "Pricing | #TechWithAman" }),
+  renderPage(req, res, "pages/pricing", { key: "pricing", title: "Pricing | Shrisha Technology" }),
 );
 router.get("/services", (req, res) =>
-  renderPage(req, res, "pages/services", { key: "services", title: "Services | #TechWithAman" }),
+  renderPage(req, res, "pages/services", { key: "services", title: "Services | Shrisha Technology" }),
 );
 router.get("/portfolio", (req, res) =>
-  renderPage(req, res, "pages/portfolio", { key: "portfolio", title: "Portfolio | #TechWithAman" }),
+  renderPage(req, res, "pages/portfolio", { key: "portfolio", title: "Portfolio | Shrisha Technology" }),
 );
 router.get("/about", (req, res) =>
-  renderPage(req, res, "pages/about", { key: "about", title: "About | #TechWithAman" }),
+  renderPage(req, res, "pages/about", { key: "about", title: "About | Shrisha Technology" }),
 );
 router.get("/contact", (req, res) =>
-  renderPage(req, res, "pages/contact", { key: "contact", title: "Contact | #TechWithAman" }),
+  renderPage(req, res, "pages/contact", { key: "contact", title: "Contact | Shrisha Technology" }),
 );
 router.get("/login", (req, res) => {
   if (req.session?.userId) return res.redirect("/");
@@ -36,14 +36,14 @@ router.get("/login", (req, res) => {
   } else {
     delete req.session.afterLoginRedirect;
   }
-  return renderPage(req, res, "pages/login", { key: "login", title: "Login | #TechWithAman" });
+  return renderPage(req, res, "pages/login", { key: "login", title: "Login | Shrisha Technology" });
 });
 router.get("/signup", (req, res) => {
   if (req.session?.userId) return res.redirect("/");
-  return renderPage(req, res, "pages/signup", { key: "signup", title: "Signup | #TechWithAman" });
+  return renderPage(req, res, "pages/signup", { key: "signup", title: "Signup | Shrisha Technology" });
 });
 router.get("/work", (req, res) =>
-  renderPage(req, res, "pages/work", { key: "work", title: "Work With Us | #TechWithAman" }),
+  renderPage(req, res, "pages/work", { key: "work", title: "Work With Us | Shrisha Technology" }),
 );
 
 // Backwards-compat: if someone opens old .html links

@@ -1,12 +1,37 @@
   <footer class="site-footer">
     <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo footer-logo" aria-label="ShrishaTechnology">
+          <img src="/images/logo.png" alt="" class="logo-img" width="48" height="48">
+          <span class="logo-text">ShrishaTechnology</span>
+        </a>
+        <p class="footer-about">
+          {{ brand }} is a custom website, software and growth studio. We design and build websites, mobile apps, logos,
+          SEO &amp; GEO, and student projects — with clear pricing and support from India.
+        </p>
+        <p class="footer-about-meta">
+          India · WhatsApp
+          <a class="footer-contact footer-contact--phone" href="https://wa.me/917992020591">+91 79920 20591</a>
+        </p>
+        <p class="footer-about-meta">
+          Email
+          <a
+            class="footer-contact footer-contact--mail"
+            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shrishatechnology2026@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >shrishatechnology2026@gmail.com</a>
+        </p>
+      </div>
       <div>
-        <h4>Navigation</h4>
+        <h4>Company</h4>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/services">Services</a></li>
           <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="/#track">Track order</a></li>
+          <li><a href="/news">News</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
@@ -16,6 +41,7 @@
           <li>Website Development</li>
           <li>App Development</li>
           <li>Logo Design</li>
+          <li>SEO &amp; GEO</li>
           <li>Student Projects</li>
           <li><a href="/work">Work With Us</a></li>
           <li>Maintenance Support</li>
@@ -24,16 +50,12 @@
       <div>
         <h4>Legal</h4>
         <ul>
-          <li>Terms & Conditions Apply</li>
-          <li>Advance Payment Required</li>
-          <li>No Refund After Delivery</li>
-          <li>Project Timeline as Agreed</li>
-          <li>Client Data Remains Private</li>
+          <li><a href="/legal/terms">Terms &amp; Conditions Apply</a></li>
+          <li><a href="/legal/advance">Advance Payment Required</a></li>
+          <li><a href="/legal/refund">No Refund After Delivery</a></li>
+          <li><a href="/legal/timeline">Project Timeline as Agreed</a></li>
+          <li><a href="/legal/privacy">Client Data Remains Private</a></li>
         </ul>
-        <p class="footer-contact-inline">
-          Client Support:
-          <a class="footer-contact-link" href="tel:+917817085910">+91 78170 85910</a>
-        </p>
       </div>
       <div class="social-links">
         <h4>Social</h4>
@@ -75,7 +97,6 @@
     </div>
     <div class="container footer-row">
       <p>&copy; {{ year }} {{ brand }}</p>
-      <p>Made by Mayank kushwaha</p>
     </div>
   </footer>
 

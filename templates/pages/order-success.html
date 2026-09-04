@@ -47,6 +47,12 @@
               rel="noopener noreferrer"
             >View receipt</a>
             {% endif %}
+            {% if advanceOk %}
+            <a class="btn btn-outline" href="/?track={{ order.public_id|urlencode }}#track">Track your project</a>
+            <script>
+              try { localStorage.setItem("shrisha_order_id", "{{ order.public_id }}"); } catch (e) {}
+            </script>
+            {% endif %}
             <a class="btn btn-outline" href="/">Back to home</a>
             <a class="btn btn-outline" href="/pricing">View pricing</a>
           </div>

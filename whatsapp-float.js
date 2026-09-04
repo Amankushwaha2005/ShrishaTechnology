@@ -7,8 +7,8 @@
  */
 
 (function () {
-  const PHONE = "917817085910";
-  const TEXT = "Hi #TechWithAman, I would like to discuss a project.";
+  const PHONE = "917992020591";
+  const TEXT = "Hi Shrisha Technology, I would like to discuss a project.";
   const VERSION = "2";
 
   const ICON_SVG =
@@ -45,7 +45,7 @@
     el.className = "whatsapp-float";
     el.setAttribute("data-wa-version", VERSION);
     el.setAttribute("aria-label", "Chat on WhatsApp");
-    el.title = "WhatsApp — #TechWithAman";
+    el.title = "WhatsApp — Shrisha Technology";
     el.innerHTML = '<span class="whatsapp-float__btn">' + ICON_SVG + "</span>";
   }
 
