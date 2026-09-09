@@ -37,8 +37,7 @@
       plan: (category.title || "") + " — " + (pkg.title || ""),
       budget: pkg.priceLabel || formatInr(pkg.price),
     });
-    const base = window.location.pathname.endsWith(".html") ? "/contact.html" : "/contact";
-    return base + "?" + q.toString();
+    return "/contact?" + q.toString();
   }
 
   function orderUrl(category, pkg) {

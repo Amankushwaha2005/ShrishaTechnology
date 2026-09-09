@@ -46,6 +46,10 @@
   {% if page and page.key == 'work' %}
   <script src="/work-page.js" defer></script>
   {% endif %}
+  {% if page and page.key == 'contact' %}
+  <script src="/service-topics-data.js"></script>
+  <script src="/contact-page.js"></script>
+  {% endif %}
 
   <!-- React (CDN) widget: demo + easy to upgrade later -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>

@@ -9,7 +9,7 @@ public final class Site {
     public static final Map<String, String> COMPANY = Map.of(
             "name", BRAND,
             "tagline", "Websites · Apps · SEO & GEO · Student Projects",
-            "email", "mayankklush2006@gmail.com",
+            "email", "shrishatechnology2026@gmail.com",
             "phone", "+91 79920 20591"
     );
 

@@ -47,6 +47,17 @@ public class WebConfig implements WebMvcConfigurer {
                 .setCachePeriod(0);
     }
 
+    private static String clipQuery(String raw) {
+        if (raw == null) {
+            return "";
+        }
+        String v = raw.trim().replace("\r", " ").replace("\n", " ");
+        if (v.length() > 200) {
+            return v.substring(0, 200);
+        }
+        return v;
+    }
+
     private static String dirLocation(Path dir) {
         String loc = dir.toAbsolutePath().normalize().toUri().toString();
         if (!loc.endsWith("/")) {
@@ -75,6 +86,25 @@ public class WebConfig implements WebMvcConfigurer {
             loginNext = nextRaw;
         }
         ctx.put("loginNext", loginNext);
+        String enquiryPlan = clipQuery(request.getParameter("plan"));
+        String enquiryBudget = clipQuery(request.getParameter("budget"));
+        String enquirySubject = clipQuery(request.getParameter("subject"));
+        String enquiryTopic = clipQuery(request.getParameter("topic"));
+        ctx.put("enquiryPlan", enquiryPlan);
+        ctx.put("enquiryBudget", enquiryBudget);
+        ctx.put("enquirySubject", enquirySubject);
+        ctx.put("enquiryTopic", enquiryTopic);
+        StringBuilder draft = new StringBuilder();
+        if (!enquiryPlan.isEmpty()) {
+            draft.append("I would like a quote for ").append(enquiryPlan).append(".");
+        }
+        if (!enquiryBudget.isEmpty()) {
+            if (draft.length() > 0) {
+                draft.append("\n");
+            }
+            draft.append("Budget: ").append(enquiryBudget).append(".");
+        }
+        ctx.put("enquiryDraft", draft.toString());
         ctx.put("googleLoginEnabled", settings.googleClientId() != null && settings.googleClientSecret() != null);
         ctx.put("googleClientId", settings.googleClientId() == null ? "" : settings.googleClientId());
         ctx.put("githubLoginEnabled", settings.githubClientId() != null && settings.githubClientSecret() != null);

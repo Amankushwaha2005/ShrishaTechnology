@@ -1989,6 +1989,45 @@ html[data-theme="light"] .topic-hero-overlay {
    File:  views/pages/contact.ejs
    Classes: .contact-grid, .contact-form, .form-row, .captcha-box
    ========================================================= */
+.quote-topic {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 22px;
+  padding: 18px;
+}
+
+.quote-topic__photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+
+.quote-topic__cat {
+  margin: 0 0 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.quote-topic__body h2 {
+  margin: 0 0 10px;
+}
+
+.quote-topic__bullets {
+  margin: 12px 0 0;
+  padding-left: 1.15rem;
+}
+
+.quote-topic__bullets li {
+  margin-bottom: 4px;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -2260,6 +2299,15 @@ body.form-toast-open {
 
   .auth-right {
     min-height: 220px;
+  }
+
+  .quote-topic {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-topic__photo {
+    width: 100%;
+    height: 180px;
   }
 
   .contact-grid {
@@ -6038,7 +6086,20 @@ html[data-theme="light"] .order-pay-method {
   margin: 0 auto 16px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
+}
+
+.receipt-toolbar .btn-outline {
+  background: #fff;
+  color: #1a1a2e;
+  border: 1px solid #1a3a8f;
+}
+
+.receipt-toolbar .btn-outline:hover,
+.receipt-toolbar .btn-outline:focus-visible {
+  background: #e8eefc;
+  color: #122a6b;
 }
 
 .payment-receipt {

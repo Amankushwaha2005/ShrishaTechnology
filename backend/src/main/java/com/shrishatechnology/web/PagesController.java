@@ -2,6 +2,7 @@ package com.shrishatechnology.web;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,6 +68,39 @@ public class PagesController {
     @GetMapping("/work")
     public ResponseEntity<String> work(HttpServletRequest req) {
         return page(req, "pages/work.html", "work", "Work With Us | Shrisha Technology");
+    }
+
+    @GetMapping({
+            "/contact.html",
+            "/index.html",
+            "/pricing.html",
+            "/services.html",
+            "/portfolio.html",
+            "/about.html",
+            "/login.html",
+            "/signup.html",
+            "/work.html",
+            "/news.html"
+    })
+    public RedirectView htmlAlias(HttpServletRequest req) {
+        String path = req.getRequestURI();
+        String dest = switch (path) {
+            case "/index.html" -> "/";
+            case "/pricing.html" -> "/pricing";
+            case "/services.html" -> "/services";
+            case "/portfolio.html" -> "/portfolio";
+            case "/about.html" -> "/about";
+            case "/contact.html" -> "/contact";
+            case "/login.html" -> "/login";
+            case "/signup.html" -> "/signup";
+            case "/work.html" -> "/work";
+            case "/news.html" -> "/news";
+            default -> "/";
+        };
+        String qs = req.getQueryString();
+        RedirectView view = new RedirectView(qs == null || qs.isBlank() ? dest : dest + "?" + qs);
+        view.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+        return view;
     }
 
     @GetMapping("/legal")
