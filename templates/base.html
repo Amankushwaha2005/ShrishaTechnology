@@ -9,6 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
+  {% if page and page.key == 'home' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Shrisha Technology",
+    "url": "https://shrishatechnology.com/"
+  }
+  </script>
+  {% endif %}
 </head>
 <body{% if page and page.key %} data-page="{{ page.key }}"{% endif %}{% if promoTicker %} class="has-promo-ticker"{% endif %}>
   {% include "partials/campaign-chrome.html" %}
