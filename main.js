@@ -152,6 +152,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  document.querySelectorAll(".auth-password").forEach((wrap) => {
+    const input = wrap.querySelector("input");
+    const btn = wrap.querySelector(".auth-password__toggle");
+    const label = wrap.querySelector(".auth-password__label");
+    if (!input || !btn || !label) return;
+
+    btn.addEventListener("click", () => {
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      label.textContent = show ? "Hide" : "Show";
+      btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      btn.setAttribute("aria-pressed", show ? "true" : "false");
+    });
+  });
+
   const authMessageEl = document.getElementById("authMessage");
   if (authMessageEl) {
     const params = new URLSearchParams(window.location.search);

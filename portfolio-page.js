@@ -18,9 +18,14 @@
     return p.available === true && typeof p.portfolioUrl === "string" && p.portfolioUrl.trim().length > 0;
   }
 
-  function initPortfolio() {
-    const data = window.PORTFOLIO_DATA;
-    if (!data || !data.projects || !data.projects.length) return false;
+  function projectImage(p, width) {
+    const raw = typeof p.image === "string" ? p.image.trim() : "";
+    if (!raw) return "";
+    return width ? raw.replace("w=900", width) : raw;
+  }
+
+  function initPortfolio(projects) {
+    const data = { projects: projects || [] };
 
     const grid = document.getElementById("portfolio-grid");
     const modal = document.getElementById("portfolio-detail-modal");
@@ -28,10 +33,24 @@
     const modalClose = document.querySelector(".portfolio-detail-close");
     const modalBackdrop = document.querySelector(".portfolio-detail-backdrop");
 
+    const empty = document.getElementById("portfolio-empty");
     if (!grid) return false;
+    if (!data.projects.length) {
+      grid.innerHTML = "";
+      if (empty) empty.hidden = false;
+      return true;
+    }
+    if (empty) empty.hidden = true;
+
+    function mediaHtml(p, title, wide) {
+      const src = projectImage(p, wide ? "w=1200" : "");
+      if (!src) {
+        return `<div class="portfolio-card__fallback" aria-hidden="true">${escapeHtml((title || "P").charAt(0))}</div>`;
+      }
+      return `<img src="${escapeHtml(src)}" alt="${escapeHtml(title)}" loading="lazy">`;
+    }
 
     function renderUnavailableModal(p) {
-      const img = escapeHtml(p.image.replace("w=900", "w=1200"));
       const title = escapeHtml(p.title);
       const category = escapeHtml(p.category);
       const summary = escapeHtml(p.summary);
@@ -39,22 +58,21 @@
       modalBody.innerHTML = `
       <div class="home-detail-grid portfolio-detail--unavailable">
         <div class="home-detail-media">
-          <img src="${img}" alt="${title}" loading="lazy">
+          ${mediaHtml(p, p.title, true)}
         </div>
         <div class="home-detail-copy">
           <span class="chip">${category}</span>
           <h2 id="portfolio-detail-title">${title}</h2>
           <p class="home-detail-summary">${summary}</p>
           <div class="portfolio-not-available" role="status">
-            <strong>Not available</strong>
-            <p>This live portfolio has not been added yet. When the project is ready, only its portfolio will appear here.</p>
+            <strong>Delivered</strong>
+            <p>This project is delivered. A live link has not been added yet.</p>
           </div>
         </div>
       </div>`;
     }
 
     function renderAvailableModal(p) {
-      const img = escapeHtml(p.image.replace("w=900", "w=1200"));
       const title = escapeHtml(p.title);
       const category = escapeHtml(p.category);
       const summary = escapeHtml(p.summary);
@@ -74,7 +92,7 @@
       modalBody.innerHTML = `
       <div class="home-detail-grid">
         <div class="home-detail-media">
-          <img src="${img}" alt="${title}" loading="lazy">
+          ${mediaHtml(p, p.title, true)}
           ${galleryBlock}
         </div>
         <div class="home-detail-copy">
@@ -113,14 +131,14 @@
       .map((p) => {
         const ready = isProjectAvailable(p);
         const badge = ready
-          ? ""
-          : '<span class="portfolio-card__badge">Coming soon</span>';
+          ? '<span class="portfolio-card__badge portfolio-card__badge--live">Delivered</span>'
+          : '<span class="portfolio-card__badge">Delivered</span>';
         const linkText = ready ? "View portfolio →" : "View details →";
 
         return `
-      <article class="card portfolio-card" data-portfolio-id="${p.id}" role="button" tabindex="0">
+      <article class="card portfolio-card" data-portfolio-id="${escapeHtml(p.id)}" role="button" tabindex="0">
         <div class="portfolio-card__media">
-          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" width="900" height="563">
+          ${mediaHtml(p, p.title, false)}
           ${badge}
         </div>
         <div class="portfolio-card__body">
@@ -152,22 +170,21 @@
     return true;
   }
 
-  function boot() {
+  async function boot() {
     if (window.__portfolioReady) return;
-    if (initPortfolio()) {
-      window.__portfolioReady = true;
-      return;
-    }
-    let tries = 0;
-    const retry = window.setInterval(() => {
-      tries += 1;
-      if (initPortfolio()) {
-        window.__portfolioReady = true;
-        window.clearInterval(retry);
-      } else if (tries > 30) {
-        window.clearInterval(retry);
+    if (!document.getElementById("portfolio-grid")) return;
+    window.__portfolioReady = true;
+    let projects = [];
+    try {
+      const res = await fetch("/api/portfolio", { headers: { Accept: "application/json" } });
+      if (res.ok) {
+        const body = await res.json();
+        projects = Array.isArray(body.projects) ? body.projects : [];
       }
-    }, 100);
+    } catch (err) {
+      projects = [];
+    }
+    initPortfolio(projects);
   }
 
   if (document.readyState === "loading") {

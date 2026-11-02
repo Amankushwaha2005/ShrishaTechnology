@@ -161,6 +161,24 @@ public class SchemaMigrator implements ApplicationRunner {
                 )
                 """);
         db.execute("CREATE INDEX IF NOT EXISTS idx_campaigns_active ON site_campaigns(active, placement)");
+
+        db.execute("""
+                CREATE TABLE IF NOT EXISTS portfolio_projects (
+                  id SERIAL PRIMARY KEY,
+                  title TEXT NOT NULL,
+                  category TEXT NOT NULL DEFAULT 'Website',
+                  summary TEXT,
+                  image_url TEXT,
+                  live_url TEXT,
+                  details TEXT,
+                  published INTEGER NOT NULL DEFAULT 1,
+                  sort_order INTEGER NOT NULL DEFAULT 0,
+                  order_id INTEGER,
+                  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+                )
+                """);
+        db.execute("CREATE INDEX IF NOT EXISTS idx_portfolio_published ON portfolio_projects(published, sort_order)");
+        db.execute("CREATE INDEX IF NOT EXISTS idx_portfolio_order ON portfolio_projects(order_id)");
     }
 
     private void addColumnIfMissing(String table, String column, String typeSql) {

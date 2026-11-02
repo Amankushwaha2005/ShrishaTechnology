@@ -22,7 +22,12 @@
             <form class="auth-form" action="/auth/signup" method="post">
               <input class="auth-input" type="text" name="name" placeholder="Full Name" required>
               <input class="auth-input" type="email" name="email" placeholder="Email" required>
-              <input class="auth-input" type="password" name="password" placeholder="Password" required>
+              <div class="auth-password">
+                <input class="auth-input" type="password" name="password" placeholder="Password" autocomplete="new-password" required>
+                <button class="auth-password__toggle" type="button" aria-label="Show password" aria-pressed="false">
+                  <span class="auth-password__label">Show</span>
+                </button>
+              </div>
               {% include "partials/recaptcha-widget.html" %}
               <button class="btn auth-submit" type="submit">Create Account</button>
             </form>

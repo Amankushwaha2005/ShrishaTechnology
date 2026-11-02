@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="admin-body">
+  <div class="admin-app">
+    <aside class="admin-sidebar" aria-label="Admin navigation">
+      <a class="admin-brand" href="/admin" aria-label="ShrishaTechnology">
+        <img src="/images/logo.png" alt="" class="admin-brand__logo" width="40" height="40">
+        <span class="admin-brand__text">ShrishaTechnology</span>
+      </a>
+      <p class="admin-sidebar-tag">Control center</p>
+      <nav class="admin-side-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/campaigns">Campaigns &amp; media</a>
+        <a href="/admin/portfolio" class="is-current">Portfolio</a>
+        <a href="/admin#inbox-orders">Payments &amp; orders</a>
+        <a href="/admin#inbox-contact">Contact inbox</a>
+        <a href="/admin#users">Users</a>
+      </nav>
+      <div class="admin-sidebar-foot">
+        <a class="admin-sidebar-link" href="/portfolio">View portfolio</a>
+        <a class="admin-sidebar-link" href="/">View site</a>
+        <a class="admin-sidebar-link" href="/auth/logout">Logout</a>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <p class="admin-studio-kicker">Delivered work</p>
+          <h1 class="admin-title">Portfolio</h1>
+          <p class="admin-sub">Add a project after it is delivered. Only published cards appear on the public portfolio page.</p>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+          <span class="theme-icon" aria-hidden="true">
+            <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 14.5a8.5 8.5 0 0 1-11.6-11A9.5 9.5 0 1 0 21 14.5Z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12Zm0-16a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM3 11h1a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2Zm17 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM5.6 4.2a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4Zm10.7 10.7a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 0-1.4ZM18.4 4.2a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM7.7 14.9a1 1 0 0 1 0 1.4l-.7.7a1 1 0 1 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0Z"/></svg>
+          </span>
+        </button>
+      </header>
+
+      <div class="admin-content admin-studio">
+        {% if flash == 'saved' %}
+          <p class="admin-flash admin-flash-ok" role="status">Portfolio project saved.</p>
+        {% elif flash == 'toggled' %}
+          <p class="admin-flash admin-flash-ok" role="status">Visibility updated.</p>
+        {% elif flash == 'deleted' %}
+          <p class="admin-flash admin-flash-ok" role="status">Project removed from the portfolio.</p>
+        {% endif %}
+        {% if err %}
+          <p class="admin-flash admin-flash-err" role="alert">{{ err }}</p>
+        {% endif %}
+
+        <section class="admin-studio-panel">
+          <header class="admin-studio-panel__head">
+            <div>
+              <h2>{% if editing %}Edit delivered project{% else %}Add delivered project{% endif %}</h2>
+              <p>Title and category are enough. Live link and image can be added when you have them.</p>
+            </div>
+          </header>
+
+          <form class="admin-campaign-form" action="/admin/portfolio" method="post" enctype="multipart/form-data">
+            {% if form.id %}<input type="hidden" name="id" value="{{ form.id }}">{% endif %}
+            <div class="admin-campaign-grid">
+              <label class="admin-field admin-campaign-span">
+                <span>Project title</span>
+                <input name="title" type="text" maxlength="140" required value="{{ form.title }}">
+              </label>
+              <label class="admin-field">
+                <span>Category</span>
+                <select name="category" required>
+                  {% for cat in categories %}
+                    <option value="{{ cat }}" {% if form.category == cat %}selected{% endif %}>{{ cat }}</option>
+                  {% endfor %}
+                </select>
+              </label>
+              <label class="admin-field">
+                <span>Sort order</span>
+                <input name="sort_order" type="number" value="{{ form.sortOrder }}" step="1">
+              </label>
+              <label class="admin-field admin-campaign-span">
+                <span>Short summary</span>
+                <input name="summary" type="text" maxlength="500" value="{{ form.summary }}">
+              </label>
+              <label class="admin-field admin-campaign-span">
+                <span>Highlights (one per line)</span>
+                <textarea name="details" rows="4">{{ form.details }}</textarea>
+              </label>
+              <label class="admin-field">
+                <span>Live URL</span>
+                <input name="live_url" type="url" placeholder="https://" value="{{ form.liveUrl }}">
+              </label>
+              <label class="admin-field">
+                <span>Image URL</span>
+                <input name="image_url" type="text" placeholder="https:// or leave blank and upload" value="{{ form.imageUrl }}">
+              </label>
+              <label class="admin-field">
+                <span>Or upload image</span>
+                <input name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+              </label>
+              <label class="admin-field">
+                <span>Linked order id (optional)</span>
+                <input name="order_id" type="number" min="1" value="{{ form.orderId }}">
+              </label>
+              <label class="admin-field">
+                <span>Show on portfolio</span>
+                <select name="published">
+                  <option value="1" {% if form.published %}selected{% endif %}>Published</option>
+                  <option value="0" {% if not form.published %}selected{% endif %}>Hidden</option>
+                </select>
+              </label>
+            </div>
+            <div class="admin-studio-actions">
+              <button class="btn" type="submit">{% if editing %}Save changes{% else %}Add to portfolio{% endif %}</button>
+              {% if editing %}<a class="btn btn-outline" href="/admin/portfolio">Cancel</a>{% endif %}
+            </div>
+          </form>
+        </section>
+
+        <section class="admin-section" id="portfolio-list">
+          <h2 class="admin-h2">Published and hidden projects</h2>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Order</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                  <tr>
+                    <td>
+                      <strong>{{ item.title }}</strong>
+                      {% if item.summary %}<br><span class="admin-muted">{{ item.summary }}</span>{% endif %}
+                    </td>
+                    <td>{{ item.category }}</td>
+                    <td>
+                      {% if item.visible %}
+                        <span class="admin-pill admin-pill-read">On site</span>
+                      {% else %}
+                        <span class="admin-pill admin-pill-archived">Hidden</span>
+                      {% endif %}
+                    </td>
+                    <td>{{ item.order_id or "—" }}</td>
+                    <td class="admin-actions">
+                      <a class="btn btn-small" href="/admin/portfolio?edit={{ item.id }}">Edit</a>
+                      <form method="post" action="/admin/portfolio/{{ item.id }}/toggle" class="admin-inline-form">
+                        <button type="submit" class="btn btn-small btn-outline">{% if item.visible %}Hide{% else %}Publish{% endif %}</button>
+                      </form>
+                      <form method="post" action="/admin/portfolio/{{ item.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Remove this project from the portfolio?');">
+                        <button type="submit" class="btn btn-small btn-danger-outline">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                {% else %}
+                  <tr><td colspan="5" class="admin-empty">No delivered projects yet. Add the first one above when you are ready.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="/main.js"></script>
+</body>
+</html>

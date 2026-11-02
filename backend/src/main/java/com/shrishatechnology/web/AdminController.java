@@ -93,6 +93,13 @@ public class AdminController {
         stats.put("pipeline", toInt(stats.get("contactsNew")) + toInt(stats.get("workNew"))
                 + toInt(stats.get("chatsNew")) + toInt(stats.get("ordersPending")));
 
+        Map<String, Object> portfolioByOrder = new HashMap<>();
+        for (Map<String, Object> link : querySafe(
+                "SELECT id, order_id FROM portfolio_projects WHERE order_id IS NOT NULL")) {
+            if (link.get("order_id") != null) {
+                portfolioByOrder.put(String.valueOf(link.get("order_id")), link.get("id"));
+            }
+        }
         List<Map<String, Object>> orders = enrichOrders(querySafe("""
                 SELECT id, public_id, name, email, phone, service, plan, status,
                        total_inr, amount_inr, advance_paid_inr, balance_paid_inr,
@@ -100,7 +107,7 @@ public class AdminController {
                 FROM orders
                 ORDER BY created_at DESC
                 LIMIT 80
-                """));
+                """), portfolioByOrder);
         List<Map<String, Object>> contacts = querySafe(
                 "SELECT * FROM contact_submissions ORDER BY created_at DESC, id DESC LIMIT 40");
         List<Map<String, Object>> work = querySafe(
@@ -312,7 +319,10 @@ public class AdminController {
         return new RedirectView("/admin");
     }
 
-    private List<Map<String, Object>> enrichOrders(List<Map<String, Object>> rows) {
+    private List<Map<String, Object>> enrichOrders(
+            List<Map<String, Object>> rows,
+            Map<String, Object> portfolioByOrder
+    ) {
         List<Map<String, Object>> out = new ArrayList<>();
         for (Map<String, Object> row : rows) {
             Map<String, Object> o = new LinkedHashMap<>(row);
@@ -322,6 +332,7 @@ public class AdminController {
             o.put("statusNorm", st);
             o.put("balanceDue", due);
             o.put("delivered", delivered);
+            o.put("portfolioId", portfolioByOrder.get(String.valueOf(row.get("id"))));
             o.put("canDeliver", "advance_paid".equals(st) && !delivered && due > 0);
             o.put("showBalanceLink", "advance_paid".equals(st) && delivered && due > 0);
             o.put("isPending", "pending".equals(st));

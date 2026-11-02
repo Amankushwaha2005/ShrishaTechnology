@@ -21,6 +21,7 @@
       <nav class="admin-side-nav">
         <a href="/admin">Dashboard</a>
         <a href="/admin/campaigns">Campaigns &amp; media</a>
+        <a href="/admin/portfolio">Portfolio</a>
         <a href="#overview">Overview</a>
         <a href="#activity">Activity chart</a>
         <a href="#inbox-orders">Payments &amp; orders</a>
@@ -171,6 +172,13 @@
                       {% endif %}
                       {% if o.isPaidLike %}
                         <a class="btn btn-small btn-outline" href="/order/receipt?id={{ o.public_id }}" target="_blank" rel="noopener">Receipt</a>
+                      {% endif %}
+                      {% if o.delivered or o.isCompleted %}
+                        {% if o.portfolioId %}
+                          <a class="btn btn-small btn-outline" href="/admin/portfolio?edit={{ o.portfolioId }}">Edit portfolio</a>
+                        {% else %}
+                          <a class="btn btn-small" href="/admin/portfolio?order={{ o.id }}">Add to portfolio</a>
+                        {% endif %}
                       {% endif %}
                       {% if o.isPending %}
                         <a class="btn btn-small" href="/order/pay-advance?id={{ o.public_id }}" target="_blank" rel="noopener">Pay link</a>
