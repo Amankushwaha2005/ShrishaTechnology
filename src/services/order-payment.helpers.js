@@ -40,8 +40,10 @@ function canPayBalance(order) {
 
 function orderStatusLabel(order) {
   const st = normalizeOrderStatus(order);
-  if (st === "completed") return "Fully paid";
-  if (st === "advance_paid" && order.delivered_at && getBalanceDue(order) > 0) {
+  const due = getBalanceDue(order);
+  const total = Number(order?.total_inr) || 0;
+  if (st === "completed" || (st === "advance_paid" && due <= 0 && total > 0)) return "Full paid";
+  if (st === "advance_paid" && order.delivered_at && due > 0) {
     return "Balance due";
   }
   if (st === "advance_paid") return "Advance paid";

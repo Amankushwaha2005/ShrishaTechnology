@@ -63,11 +63,11 @@ public class OrderTrackController {
         String st = str(order.get("status"));
         boolean advancePaid = "advance_paid".equals(st) || "completed".equals(st) || "paid".equals(st);
         boolean delivered = order.get("delivered_at") != null;
-        boolean completed = "completed".equals(st);
         int advance = num(order.get("advance_paid_inr"), advancePaid ? num(order.get("amount_inr"), 0) : 0);
         int total = num(order.get("total_inr"), 0);
         int balancePaid = num(order.get("balance_paid_inr"), 0);
         int balanceDue = Math.max(0, total - advance - balancePaid);
+        boolean completed = "completed".equals(st) || (advancePaid && total > 0 && balanceDue == 0);
 
         String phase;
         if (completed) {
@@ -86,7 +86,7 @@ public class OrderTrackController {
         steps.add(step("build", "Project in progress", advancePaid, "build".equals(phase),
                 "build".equals(phase) ? "Live — our team is working on your project" : ""));
         steps.add(step("delivered", "Ready / delivered", delivered, "delivered".equals(phase), formatWhen(order.get("delivered_at"))));
-        steps.add(step("complete", "Fully paid", completed, false, formatWhen(order.get("completed_at"))));
+        steps.add(step("complete", "Full paid", completed, false, formatWhen(order.get("completed_at"))));
 
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("ok", true);

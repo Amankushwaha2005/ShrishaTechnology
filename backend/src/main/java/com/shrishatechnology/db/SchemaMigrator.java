@@ -140,6 +140,14 @@ public class SchemaMigrator implements ApplicationRunner {
                     advance_paid_inr = amount_inr
                 WHERE status = 'paid' AND advance_paid_inr IS NULL
                 """);
+        db.execute("""
+                UPDATE orders
+                SET status = 'completed',
+                    completed_at = COALESCE(completed_at, NOW())
+                WHERE status IN ('advance_paid', 'paid')
+                  AND total_inr > 0
+                  AND (COALESCE(advance_paid_inr, amount_inr, 0) + COALESCE(balance_paid_inr, 0)) >= total_inr
+                """);
         db.execute("CREATE INDEX IF NOT EXISTS idx_orders_balance_razorpay ON orders(razorpay_balance_order_id)");
 
         db.execute("""

@@ -129,23 +129,6 @@ window.HOME_DATA = {
       link: "/services#seo-geo",
       linkLabel: "Explore SEO & GEO",
     },
-    "student-projects": {
-      title: "Student Projects",
-      tag: "Service",
-      image:
-        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
-      summary: "Final year projects with report and presentation support.",
-      details: [
-        "Project code & documentation",
-        "PPT and viva preparation tips",
-        "Web, app & mini software topics",
-        "Plagiarism-safe original work",
-        "Deadline-focused delivery",
-      ],
-      price: "Budget-friendly",
-      link: "/contact",
-      linkLabel: "Get a quote",
-    },
   },
   showcase: [
     {
@@ -174,15 +157,6 @@ window.HOME_DATA = {
       description:
         "Clean Material UI app with login flow and API integration — ideal for startups testing an idea.",
       homeId: "app-dev",
-    },
-    {
-      title: "Student Final Year Project",
-      brand: "Engineering College",
-      image:
-        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
-      description:
-        "Full stack student project with report, PPT support and viva guidance — delivered on deadline.",
-      homeId: "student-projects",
     },
     {
       title: "SEO & GEO",

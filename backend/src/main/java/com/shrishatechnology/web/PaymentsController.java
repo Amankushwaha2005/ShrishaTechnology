@@ -348,8 +348,10 @@ public class PaymentsController {
     public ResponseEntity<String> payBalance(HttpServletRequest req, @RequestParam(name = "id", required = false) String publicId) {
         Map<String, Object> order = lookup(publicId);
         String st = order == null ? "" : str(order.get("status"));
-        boolean alreadyComplete = "completed".equals(st);
         int due = order == null ? 0 : balanceDue(order);
+        int total = order == null ? 0 : num(order.get("total_inr"), 0);
+        boolean alreadyComplete = "completed".equals(st)
+                || (due <= 0 && total > 0 && ("advance_paid".equals(st) || "paid".equals(st)));
         boolean canPay = order != null
                 && ("advance_paid".equals(st) || "completed".equals(st))
                 && order.get("delivered_at") != null
@@ -361,7 +363,15 @@ public class PaymentsController {
         ctx.put("canPay", canPay);
         ctx.put("balanceDue", due);
         ctx.put("advancePaid", order == null ? 0 : num(order.get("advance_paid_inr"), num(order.get("amount_inr"), 0)));
-        ctx.put("orderStatusLabel", "advance_paid".equals(st) || "completed".equals(st) ? "Advance paid" : (st.isBlank() ? "Pending" : st));
+        String orderStatusLabel = "Pending";
+        if ("completed".equals(st) || (due <= 0 && ("advance_paid".equals(st) || "paid".equals(st)))) {
+            orderStatusLabel = "Full paid";
+        } else if ("advance_paid".equals(st) || "paid".equals(st)) {
+            orderStatusLabel = "Advance paid";
+        } else if (!st.isBlank()) {
+            orderStatusLabel = st;
+        }
+        ctx.put("orderStatusLabel", orderStatusLabel);
         return templates.render("pages/order-pay-balance.html", ctx);
     }
 

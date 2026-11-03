@@ -367,11 +367,12 @@ public class AdminController {
             o.put("balanceDue", due);
             o.put("delivered", delivered);
             o.put("portfolioId", portfolioByOrder.get(String.valueOf(row.get("id"))));
+            boolean fullPaid = isFullPaid(st, due);
             o.put("canDeliver", "advance_paid".equals(st) && !delivered && due > 0);
             o.put("showBalanceLink", "advance_paid".equals(st) && delivered && due > 0);
             o.put("isPending", "pending".equals(st));
-            o.put("isPaidLike", "advance_paid".equals(st) || "completed".equals(st));
-            o.put("isCompleted", "completed".equals(st));
+            o.put("isPaidLike", fullPaid || "advance_paid".equals(st));
+            o.put("isCompleted", fullPaid);
             o.put("pillClass", pill(st, delivered, due));
             o.put("statusLabel", label(st, delivered, due));
             o.put("whenLabel", fmt(row.get("created_at")));
@@ -381,7 +382,7 @@ public class AdminController {
     }
 
     private static String pill(String st, boolean delivered, int due) {
-        if ("completed".equals(st)) {
+        if (isFullPaid(st, due)) {
             return "completed";
         }
         if ("advance_paid".equals(st) && delivered && due > 0) {
@@ -394,8 +395,8 @@ public class AdminController {
     }
 
     private static String label(String st, boolean delivered, int due) {
-        if ("completed".equals(st)) {
-            return "Fully paid";
+        if (isFullPaid(st, due)) {
+            return "Full paid";
         }
         if ("advance_paid".equals(st) && delivered && due > 0) {
             return "Balance due";
@@ -404,6 +405,14 @@ public class AdminController {
             return "Advance paid";
         }
         return "Pending";
+    }
+
+    /** Advance order whose later balance payment has covered the package total. */
+    private static boolean isFullPaid(String st, int due) {
+        if ("completed".equals(st)) {
+            return true;
+        }
+        return due <= 0 && ("advance_paid".equals(st) || "paid".equals(st));
     }
 
     private static String normalizeStatus(Map<String, Object> order) {

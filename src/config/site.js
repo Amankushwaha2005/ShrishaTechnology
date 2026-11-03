@@ -10,7 +10,7 @@ const brand = "Shrisha Technology";
 
 const company = {
   name: "Shrisha Technology",
-  tagline: "Websites · Apps · SEO & GEO · Student Projects",
+  tagline: "Websites · Apps · SEO & GEO",
   email: "shrishatechnology2026@gmail.com",
   phone: "+91 79920 20591",
 };

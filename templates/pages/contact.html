@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <main>
+  <main class="contact-page">
     <section class="page-hero">
       <div class="container">
         <span class="chip">Contact</span>
@@ -9,7 +9,7 @@
         <p>Tell us a bit more about this service and we will get back with a quote.</p>
         {% else %}
         <h1 id="quote-hero-title">Let us Build Your Project</h1>
-        <p>Reach out for website, app, logo and student projects.</p>
+        <p>Reach out for website, app, and logo work.</p>
         {% endif %}
       </div>
     </section>
@@ -69,7 +69,7 @@
 
               <div class="form-row">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" placeholder="Type your message here." required>{{ enquiryDraft }}</textarea>
+                <textarea id="message" name="message" rows="4" placeholder="Type your message here." required>{{ enquiryDraft }}</textarea>
               </div>
 
               {% include "partials/recaptcha-widget.html" %}

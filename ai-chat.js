@@ -51,10 +51,6 @@
       return "Website banwane ke liye batayein: business site / portfolio / shop? Kitne pages? Starter plan ₹2,999 se shuru (1 page + form + WhatsApp). Professional ₹7,999 (5 pages). Contact form ya WhatsApp par details bhejo — hum quote aur timeline denge.";
     }
 
-    if (/student|viva|final year|college|btech|project/.test(combined)) {
-      return "Student project: code, report, PPT, viva help — deadline batao. WhatsApp +91 79920 20591 ya Contact page use karo.";
-    }
-
     if (/app|android|flutter|mobile/.test(combined)) {
       return "App development Android/Flutter se — login, dashboard, Play Store help. Pricing page par app packages dekho ya WhatsApp par idea share karo.";
     }
@@ -80,10 +76,10 @@
     }
 
     if (/hello|hi|hey|namaste|help|hii/.test(combined)) {
-      return "Hi! Main Shrisha Technology assistant. Website, app, logo, student project — kya chahiye?";
+      return "Hi! Main Shrisha Technology assistant. Website, app, logo — kya chahiye?";
     }
 
-    return "Thanks! Shrisha Technology websites, apps, logos & student projects karta hai. Pricing/services poochho ya WhatsApp +91 79920 20591 par likho — team reply karegi.";
+    return "Thanks! Shrisha Technology websites, apps aur logos banata hai. Pricing/services poochho ya WhatsApp +91 79920 20591 par likho — team reply karegi.";
   }
 
   function esc(s) {
@@ -189,7 +185,7 @@
     if (!messagesEl.dataset.ready) {
       messagesEl.dataset.ready = "1";
       addBubble(
-        `Namaste! Main ${BRAND} ka smart assistant hoon — Hindi, English, Hinglish sab samajhta hoon. Website, app, logo, student project — casually likho, main help karunga.`,
+        `Namaste! Main ${BRAND} ka smart assistant hoon — Hindi, English, Hinglish sab samajhta hoon. Website, app, logo — casually likho, main help karunga.`,
         "bot",
       );
       checkStatus();
