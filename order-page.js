@@ -32,6 +32,9 @@
   const summaryPlan = document.getElementById("summary-plan");
   const summaryTotal = document.getElementById("summary-total");
   const summaryAdvance = document.getElementById("summary-advance");
+  const summaryDueLabel = document.getElementById("summary-due-label");
+  const panelLabel = document.getElementById("order-panel-label");
+  const whatsappHint = document.getElementById("order-whatsapp-hint");
 
   let checkoutData = null;
   let lastPublicId = "";
@@ -44,9 +47,19 @@
     return "₹" + Number(n).toLocaleString("en-IN");
   }
 
+  function payMode() {
+    const selected = form.querySelector('input[name="pay_mode"]:checked');
+    return selected && selected.value === "full" ? "full" : "advance";
+  }
+
+  function isFullPay() {
+    return payMode() === "full";
+  }
+
   function computeAdvance(total) {
     const t = Math.max(0, Math.floor(Number(total) || 0));
     if (t <= 0) return 0;
+    if (isFullPay()) return t;
     return Math.max(1, Math.round((t * advancePercent) / 100));
   }
 
@@ -63,6 +76,17 @@
         total > 0 ? formatInr(total) : '<a href="/pricing">View pricing</a>';
     }
     if (summaryAdvance) summaryAdvance.textContent = advance > 0 ? formatInr(advance) : "—";
+    if (summaryDueLabel) {
+      summaryDueLabel.textContent = isFullPay()
+        ? "Full payment due now (100%)"
+        : "Advance due now (" + advancePercent + "%)";
+    }
+    if (panelLabel) panelLabel.textContent = isFullPay() ? "Full payment" : "Advance";
+    if (whatsappHint) {
+      whatsappHint.textContent = isFullPay()
+        ? "Send full-payment screenshot — we confirm your slot"
+        : "Send advance screenshot — we confirm your slot";
+    }
     if (panelAmount && advance > 0) panelAmount.textContent = formatInr(advance);
   }
 
@@ -82,6 +106,7 @@
       plan: String(fd.get("plan") || "").trim(),
       notes: String(fd.get("notes") || "").trim(),
       total_inr: fd.get("total_inr"),
+      pay_mode: payMode(),
     };
   }
 
@@ -103,17 +128,20 @@
   }
 
   function whatsappUrl(payload, publicId, advance) {
+    const full = payload.pay_mode === "full";
     const text =
-      "Hi Shrisha Technology, I want to pay advance for:\n" +
+      "Hi Shrisha Technology, I want to pay " +
+      (full ? "the full amount" : "advance") +
+      " for:\n" +
       "• Service: " +
       payload.service +
       "\n• Package: " +
       payload.plan +
       "\n• Package total: ₹" +
       Number(payload.total_inr).toLocaleString("en-IN") +
-      "\n• Advance (" +
-      advancePercent +
-      "%): ₹" +
+      "\n• " +
+      (full ? "Full payment (100%)" : "Advance (" + advancePercent + "%)") +
+      ": ₹" +
       advance.toLocaleString("en-IN") +
       "\n• Name: " +
       payload.name +
@@ -388,6 +416,9 @@
     [totalInput, serviceInput, planInput, phoneInput].forEach(function (el) {
       if (el) el.addEventListener(ev, updateSummary);
     });
+  });
+  form.querySelectorAll('input[name="pay_mode"]').forEach(function (el) {
+    el.addEventListener("change", updateSummary);
   });
 
   updateSummary();

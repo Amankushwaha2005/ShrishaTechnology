@@ -115,6 +115,7 @@ public class PaymentsController {
         ctx.put("receipt", receipt);
         ctx.put("balanceDue", balanceDue);
         ctx.put("advanceOk", advanceOk);
+        ctx.put("fullyPaid", advanceOk && balanceDue == 0);
         return templates.render("pages/order-success.html", ctx);
     }
 
@@ -139,8 +140,11 @@ public class PaymentsController {
                 ? num(order.get("balance_paid_inr"), 0)
                 : num(order.get("advance_paid_inr"), num(order.get("amount_inr"), 0));
         Map<String, Object> receipt = new HashMap<>();
-        receipt.put("phase", isBalance ? "balance" : "advance");
-        receipt.put("receiptTitle", isBalance ? "Balance Payment Receipt" : "Advance Payment Receipt");
+        boolean fullUpfront = !isBalance && num(order.get("advance_percent"), 0) >= 100;
+        receipt.put("phase", isBalance ? "balance" : (fullUpfront ? "full" : "advance"));
+        receipt.put("receiptTitle", isBalance
+                ? "Balance Payment Receipt"
+                : (fullUpfront ? "Full Payment Receipt" : "Advance Payment Receipt"));
         receipt.put("payeeName", order.get("name") == null ? "—" : order.get("name"));
         receipt.put("status", "PAID");
         receipt.put("paymentDate", formatDate(first(order.get("paid_at"), order.get("balance_paid_at"), order.get("created_at"))));
@@ -185,8 +189,9 @@ public class PaymentsController {
             if (totalInr < 1) {
                 return ResponseEntity.badRequest().body(Map.of("ok", false, "error", "Total amount is required."));
             }
-            int advancePercent = settings.paymentAdvancePercent();
-            int amountInr = computeAdvance(totalInr);
+            boolean full = "full".equalsIgnoreCase(str(payload.get("pay_mode")).trim());
+            int advancePercent = full ? 100 : settings.paymentAdvancePercent();
+            int amountInr = full ? totalInr : computeAdvance(totalInr);
             String publicId = publicId();
             db.execute(
                     """
@@ -214,7 +219,8 @@ public class PaymentsController {
             out.put("amountInr", amountInr);
             out.put("keyId", settings.razorpayKeyId());
             out.put("customer", Map.of("name", name, "email", email, "contact", phone == null ? "" : phone));
-            out.put("description", service + " — " + plan + " (advance)");
+            out.put("payMode", full ? "full" : "advance");
+            out.put("description", service + " — " + plan + (full ? " (full payment)" : " (advance)"));
             return ResponseEntity.ok(out);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of(
@@ -242,14 +248,27 @@ public class PaymentsController {
         if (order == null) {
             return ResponseEntity.status(404).body(Map.of("ok", false, "error", "Order not found."));
         }
-        db.execute(
-                """
-                UPDATE orders
-                SET status='advance_paid', razorpay_payment_id=?, paid_at=NOW(), advance_paid_inr=amount_inr
-                WHERE id=?
-                """,
-                paymentId, order.get("id")
-        );
+        boolean full = num(order.get("amount_inr"), 0) >= num(order.get("total_inr"), 1);
+        if (full) {
+            db.execute(
+                    """
+                    UPDATE orders
+                    SET status='completed', razorpay_payment_id=?, paid_at=NOW(),
+                        advance_paid_inr=amount_inr, balance_paid_inr=0, completed_at=NOW()
+                    WHERE id=?
+                    """,
+                    paymentId, order.get("id")
+            );
+        } else {
+            db.execute(
+                    """
+                    UPDATE orders
+                    SET status='advance_paid', razorpay_payment_id=?, paid_at=NOW(), advance_paid_inr=amount_inr
+                    WHERE id=?
+                    """,
+                    paymentId, order.get("id")
+            );
+        }
         return ResponseEntity.ok(Map.of("ok", true, "redirectUrl", "/order/success?id=" + order.get("public_id")));
     }
 
@@ -305,7 +324,8 @@ public class PaymentsController {
                     "amountPaise", num(order.get("amount_inr"), 0) * 100,
                     "amountInr", num(order.get("amount_inr"), 0),
                     "keyId", settings.razorpayKeyId(),
-                    "description", order.get("service") + " — " + order.get("plan") + " (advance)"
+                    "description", order.get("service") + " — " + order.get("plan")
+                            + (num(order.get("amount_inr"), 0) >= num(order.get("total_inr"), 1) ? " (full payment)" : " (advance)")
             ));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(Map.of("ok", false, "error", publicDbError(e, "Could not resume payment.")));

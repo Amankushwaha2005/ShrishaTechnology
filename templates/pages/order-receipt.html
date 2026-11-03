@@ -76,7 +76,9 @@
     </table>
 
     <footer class="payment-receipt__footer">
-      {% if receipt.phase == 'balance' %}
+      {% if receipt.phase == 'full' %}
+      <p>This is a computer-generated receipt for your full payment. Your order is now fully paid.</p>
+      {% elif receipt.phase == 'balance' %}
       <p>This is a computer-generated receipt for your balance payment. Your order is now fully paid.</p>
       {% else %}
       <p>This is a computer-generated receipt for your advance payment. Remaining balance is due after project delivery.</p>

@@ -5720,6 +5720,40 @@ html[data-theme="light"] .about-topic-card:hover {
   font-size: 1.2rem;
 }
 
+.order-pay-choice {
+  display: grid;
+  gap: 10px;
+}
+
+.order-pay-choice__opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.order-pay-choice__opt:has(input:checked) {
+  border-color: rgba(46, 204, 113, 0.55);
+  background: rgba(46, 204, 113, 0.08);
+}
+
+.order-pay-choice__opt input {
+  margin-top: 4px;
+}
+
+.order-pay-choice__opt span {
+  display: grid;
+  gap: 2px;
+}
+
+.order-pay-choice__opt small {
+  color: var(--muted);
+}
+
 .order-summary-list dt {
   margin: 0;
   font-size: 0.85rem;

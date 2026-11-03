@@ -6,8 +6,8 @@
         <span class="chip">Order &amp; Pay</span>
         <h1>Book your project</h1>
         <p>
-          Fill your details, then choose UPI, card, or WhatsApp to pay the
-          <strong>{{ paymentAdvancePercent }}%</strong> advance. Balance before final delivery.
+          Fill your details, then pay the <strong>{{ paymentAdvancePercent }}%</strong> advance
+          or the <strong>full amount</strong> in one payment.
         </p>
       </div>
     </section>
@@ -39,7 +39,7 @@
               </dd>
             </div>
             <div class="order-summary-row order-summary-row--highlight">
-              <dt>Advance due now ({{ paymentAdvancePercent }}%)</dt>
+              <dt id="summary-due-label">Advance due now ({{ paymentAdvancePercent }}%)</dt>
               <dd id="summary-advance">
                 {% if orderPrefill.amount_inr and orderPrefill.amount_inr > 0 %}
                   ₹{{ orderPrefill.amount_inr }}
@@ -125,6 +125,26 @@
               </div>
             </div>
 
+            <div class="order-field-box">
+              <h3 class="order-field-box__title">How do you want to pay?</h3>
+              <div class="order-pay-choice" role="radiogroup" aria-label="Payment type">
+                <label class="order-pay-choice__opt">
+                  <input type="radio" name="pay_mode" value="advance" checked>
+                  <span>
+                    <strong>Advance payment</strong>
+                    <small>{{ paymentAdvancePercent }}% now. Remaining balance after delivery.</small>
+                  </span>
+                </label>
+                <label class="order-pay-choice__opt">
+                  <input type="radio" name="pay_mode" value="full">
+                  <span>
+                    <strong>Full payment</strong>
+                    <small>Pay 100% now in a single payment. No balance later.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
             <p class="order-form-error" id="order-form-error" hidden role="alert"></p>
 
             <button class="btn order-pay-btn" type="submit" id="order-pay-btn">
@@ -135,7 +155,7 @@
               <div class="order-payment-panel__head">
                 <h3>Choose payment method</h3>
                 <p class="order-payment-panel__amount">
-                  Advance: <strong id="order-panel-amount">—</strong>
+                  <span id="order-panel-label">Advance</span>: <strong id="order-panel-amount">—</strong>
                 </p>
               </div>
               <div class="order-pay-methods" role="group" aria-label="Payment methods">
@@ -161,7 +181,7 @@
                   </span>
                   <span class="order-pay-method__text">
                     <strong>Pay via WhatsApp</strong>
-                    <small>Send advance screenshot — we confirm your slot</small>
+                    <small id="order-whatsapp-hint">Send payment screenshot — we confirm your slot</small>
                   </span>
                   <span class="order-pay-method__arrow" aria-hidden="true">→</span>
                 </a>

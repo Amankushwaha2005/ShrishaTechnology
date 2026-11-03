@@ -5,14 +5,20 @@
       <div class="container">
         <article class="card order-success-card">
           {% if advanceOk %}
-            <span class="chip">Advance received</span>
+            <span class="chip">{% if fullyPaid %}Full payment received{% else %}Advance received{% endif %}</span>
             <h1>Thank you, {{ order.name }}!</h1>
-            <p>Your advance payment is confirmed. We will contact you shortly to start your project.</p>
+            <p>
+              {% if fullyPaid %}
+                Your full payment is confirmed. We will contact you shortly to start your project.
+              {% else %}
+                Your advance payment is confirmed. We will contact you shortly to start your project.
+              {% endif %}
+            </p>
             <dl class="order-summary-list">
               <div><dt>Order ID</dt><dd><code>{{ order.public_id }}</code></dd></div>
               <div><dt>Service</dt><dd>{{ order.service }}</dd></div>
               <div><dt>Package</dt><dd>{{ order.plan }}</dd></div>
-              <div><dt>Paid (advance)</dt><dd>₹{{ order.advance_paid_inr or order.amount_inr }}</dd></div>
+              <div><dt>{% if fullyPaid %}Paid in full{% else %}Paid (advance){% endif %}</dt><dd>₹{{ order.advance_paid_inr or order.amount_inr }}</dd></div>
               <div><dt>Package total</dt><dd>₹{{ order.total_inr }}</dd></div>
               {% if balanceDue and balanceDue > 0 %}
               <div><dt>Balance (after delivery)</dt><dd>₹{{ balanceDue }}</dd></div>
@@ -39,7 +45,7 @@
               href="/order/receipt?id={{ order.public_id|urlencode }}&print=1"
               target="_blank"
               rel="noopener noreferrer"
-            >Download advance receipt</a>
+            >{% if fullyPaid %}Download receipt{% else %}Download advance receipt{% endif %}</a>
             <a
               class="btn btn-outline"
               href="/order/receipt?id={{ order.public_id|urlencode }}"
