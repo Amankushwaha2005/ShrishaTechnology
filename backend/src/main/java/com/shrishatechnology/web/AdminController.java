@@ -110,6 +110,12 @@ public class AdminController {
                 """), portfolioByOrder);
         List<Map<String, Object>> contacts = querySafe(
                 "SELECT * FROM contact_submissions ORDER BY created_at DESC, id DESC LIMIT 40");
+        for (Map<String, Object> row : contacts) {
+            String message = row.get("message") == null ? "" : String.valueOf(row.get("message"));
+            boolean longMessage = message.length() > 140;
+            row.put("messageLong", longMessage);
+            row.put("messageShort", longMessage ? message.substring(0, 140).trim() + "…" : message);
+        }
         List<Map<String, Object>> work = querySafe(
                 "SELECT * FROM work_submissions ORDER BY created_at DESC, id DESC LIMIT 40");
         List<Map<String, Object>> chats = querySafe(
@@ -120,6 +126,12 @@ public class AdminController {
                 ORDER BY id DESC
                 LIMIT 120
                 """);
+        long selfId = AuthSupport.toLong(session.getAttribute("user_id"));
+        for (Map<String, Object> user : users) {
+            boolean self = AuthSupport.toLong(user.get("id")) == selfId;
+            user.put("isSelf", self);
+            user.put("canDelete", !self);
+        }
 
         LocalDate start = LocalDate.now().minusDays(13);
         List<String> labels = new ArrayList<>();
@@ -293,6 +305,28 @@ public class AdminController {
         }
         db.execute("UPDATE users SET role = ?, updated_at = NOW() WHERE id = ?", role, id);
         return new RedirectView("/admin?flash=roleupdated#users");
+    }
+
+    @PostMapping("/admin/users/{id}/delete")
+    public Object deleteUser(HttpServletRequest req, HttpSession session, @PathVariable long id) {
+        Object denied = guard.denyIfNotAdmin(req, session);
+        if (denied != null) {
+            return denied;
+        }
+        Object self = session.getAttribute("user_id");
+        if (self != null && AuthSupport.toLong(self) == id) {
+            return new RedirectView("/admin?err=selfdelete#users");
+        }
+        Map<String, Object> user = db.queryOne("SELECT id, role FROM users WHERE id = ?", id);
+        if (user == null) {
+            return new RedirectView("/admin?err=invalid#users");
+        }
+        if ("admin".equals(String.valueOf(user.get("role")))
+                && count("SELECT COUNT(*) AS c FROM users WHERE role='admin'") <= 1) {
+            return new RedirectView("/admin?err=lastadmin#users");
+        }
+        db.execute("DELETE FROM users WHERE id = ?", id);
+        return new RedirectView("/admin?flash=userdeleted#users");
     }
 
     @GetMapping("/admin/connect")

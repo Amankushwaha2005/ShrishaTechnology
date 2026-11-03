@@ -62,11 +62,17 @@
           <p class="admin-flash admin-flash-ok" role="status">Advance marked as paid.</p>
         {% elif flash == 'orderdeleted' %}
           <p class="admin-flash admin-flash-ok" role="status">Order deleted.</p>
+        {% elif flash == 'userdeleted' %}
+          <p class="admin-flash admin-flash-ok" role="status">User deleted.</p>
         {% endif %}
         {% if err == 'invalid' %}
           <p class="admin-flash admin-flash-err" role="alert">That action was not valid.</p>
         {% elif err == 'selfdemote' %}
           <p class="admin-flash admin-flash-err" role="alert">You cannot remove your own admin role.</p>
+        {% elif err == 'selfdelete' %}
+          <p class="admin-flash admin-flash-err" role="alert">You cannot delete your own account.</p>
+        {% elif err == 'lastadmin' %}
+          <p class="admin-flash admin-flash-err" role="alert">The last admin account cannot be deleted.</p>
         {% elif err == 'notready' %}
           <p class="admin-flash admin-flash-err" role="alert">Only advance-paid orders can be marked delivered.</p>
         {% elif err == 'nobalance' %}
@@ -142,9 +148,9 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="admin-fold is-folded">
                 {% for o in orders %}
-                  <tr>
+                  <tr{% if loop.index > 5 %} class="admin-row-extra"{% endif %}>
                     <td>{{ o.id }}</td>
                     <td class="admin-nowrap">{{ o.whenLabel }}</td>
                     <td>
@@ -197,6 +203,9 @@
               </tbody>
             </table>
           </div>
+          {% if orders|length > 5 %}
+            <button type="button" class="btn btn-small admin-more-btn" data-more>More ({{ orders|length - 5 }} more)</button>
+          {% endif %}
         </section>
 
         <section class="admin-section" id="inbox-contact">
@@ -213,14 +222,23 @@
                   <th class="admin-th-actions">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="admin-fold is-folded">
                 {% for row in contacts %}
-                  <tr>
+                  <tr{% if loop.index > 5 %} class="admin-row-extra"{% endif %}>
                     <td>{{ row.id }}</td>
                     <td><span class="admin-pill admin-pill-{{ row.status }}">{{ row.status }}</span></td>
                     <td>{{ row.name }}</td>
                     <td><a href="mailto:{{ row.email }}">{{ row.email }}</a></td>
-                    <td class="admin-cell-msg">{{ row.message }}</td>
+                    <td class="admin-cell-msg">
+                      {% if row.messageLong %}
+                        <details class="admin-msg-more">
+                          <summary>{{ row.messageShort }} <span>More</span></summary>
+                          <p>{{ row.message }}</p>
+                        </details>
+                      {% else %}
+                        {{ row.message }}
+                      {% endif %}
+                    </td>
                     <td class="admin-actions">
                       <form method="post" action="/admin/submissions/contact/{{ row.id }}/status" class="admin-inline-form">
                         <select name="status" class="admin-select">
@@ -241,6 +259,9 @@
               </tbody>
             </table>
           </div>
+          {% if contacts|length > 5 %}
+            <button type="button" class="btn btn-small admin-more-btn" data-more>More ({{ contacts|length - 5 }} more)</button>
+          {% endif %}
         </section>
 
         <section class="admin-section" id="inbox-chat">
@@ -349,9 +370,9 @@
                   <th class="admin-th-actions">Role actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="admin-fold is-folded">
                 {% for u in users %}
-                  <tr>
+                  <tr{% if loop.index > 5 %} class="admin-row-extra"{% endif %}>
                     <td>{{ u.id }}</td>
                     <td><span class="admin-pill {% if u.role == 'admin' %}admin-pill-admin{% else %}admin-pill-user{% endif %}">{{ u.role }}</span></td>
                     <td>{{ u.provider }}</td>
@@ -365,6 +386,13 @@
                         </select>
                         <button type="submit" class="btn btn-small">Update</button>
                       </form>
+                      {% if u.canDelete %}
+                        <form method="post" action="/admin/users/{{ u.id }}/delete" class="admin-inline-form" onsubmit="return confirm('Delete this user?');">
+                          <button type="submit" class="btn btn-small btn-danger-outline">Delete</button>
+                        </form>
+                      {% else %}
+                        <span class="admin-muted">You</span>
+                      {% endif %}
                     </td>
                   </tr>
                 {% else %}
@@ -373,6 +401,9 @@
               </tbody>
             </table>
           </div>
+          {% if users|length > 5 %}
+            <button type="button" class="btn btn-small admin-more-btn" data-more>More ({{ users|length - 5 }} more)</button>
+          {% endif %}
         </section>
       </div>
     </div>
@@ -412,6 +443,15 @@
         }
       });
     })();
+    document.querySelectorAll("[data-more]").forEach(function (btn) {
+      var fold = btn.closest(".admin-section").querySelector(".admin-fold");
+      var moreLabel = btn.textContent;
+      btn.addEventListener("click", function () {
+        var open = fold.classList.toggle("is-open");
+        fold.classList.toggle("is-folded", !open);
+        btn.textContent = open ? "Less" : moreLabel;
+      });
+    });
   </script>
 </body>
 </html>

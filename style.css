@@ -707,6 +707,12 @@ html[data-theme="light"] .auth-input {
 .login-left h1 {
   font-size: clamp(1.7rem, 2.8vw, 2.2rem);
   margin: 0;
+  color: #f7f4ea;
+  line-height: 1.25;
+}
+
+html[data-theme="light"] .login-left h1 {
+  color: #ffffff;
 }
 
 .login-subtitle {
@@ -3651,6 +3657,14 @@ html[data-theme="light"] .admin-topbar {
   background: var(--panel);
 }
 
+.admin-fold.is-folded .admin-row-extra {
+  display: none;
+}
+
+.admin-more-btn {
+  margin-top: 12px;
+}
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
@@ -3691,8 +3705,33 @@ html[data-theme="light"] .admin-topbar {
 }
 
 .admin-cell-msg {
-  max-width: 280px;
+  max-width: 320px;
   word-break: break-word;
+}
+
+.admin-msg-more {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-msg-more summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.admin-msg-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-msg-more summary span {
+  color: var(--brand);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-msg-more p {
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 .admin-cell-page {
