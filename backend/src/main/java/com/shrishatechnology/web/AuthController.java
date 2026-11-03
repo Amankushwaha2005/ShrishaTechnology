@@ -253,7 +253,7 @@ public class AuthController {
         String state = nv(req.getParameter("state"));
         String expected = String.valueOf(session.getAttribute("oauth_state"));
         if (code.isEmpty() || state.isEmpty() || !state.equals(expected)) {
-            return authError("Google login session expired. Open http://localhost:3000/login and try again.", returnTo);
+            return authError(cap(provider) + " login session expired. Open the login page and try again.", returnTo);
         }
         Object sessProvider = session.getAttribute("oauth_provider");
         if (sessProvider != null && !provider.equals(sessProvider)) {
@@ -338,6 +338,9 @@ public class AuthController {
                 + "&code=" + enc(code)
                 + "&redirect_uri=" + enc(cfg.get("redirect_uri"))
                 + "&grant_type=authorization_code";
+        if ("microsoft".equals(provider) && cfg.get("scope") != null) {
+            form += "&scope=" + enc(cfg.get("scope"));
+        }
         HttpRequest.Builder b = HttpRequest.newBuilder(URI.create(cfg.get("token_url")))
                 .timeout(Duration.ofSeconds(15))
                 .header("Content-Type", "application/x-www-form-urlencoded")
@@ -556,31 +559,42 @@ public class AuthController {
     }
 
     private static String oauthProviderError(String provider, String error, String description) {
+        String name = cap(provider);
         return switch (error) {
             case "redirect_uri_mismatch" ->
-                    "Google redirect URI match nahi hui. Console mein add karo: http://localhost:3000/auth/google/callback";
+                    name + " redirect URI match nahi hui. Azure/Google/GitHub mein https://shrishatechnology.com/auth/"
+                            + provider + "/callback add karo.";
             case "access_denied" ->
-                    "Google ne allow nahi kiya. OAuth consent screen → Testing ho to apna Gmail Test users mein add karo.";
+                    name + " ne login allow nahi kiya. Dobara try karo aur permission Accept karo.";
             case "deleted_client", "unauthorized_client", "invalid_client" ->
-                    "Google OAuth client invalid hai. Console se naya Web client banao aur .env update karo.";
-            default -> cap(provider) + " login failed: " + (description.isEmpty() ? error : description);
+                    name + " Client ID ya Secret galat hai. VPS .env check karke server restart karo.";
+            default -> name + " login failed: " + (description.isEmpty() ? error : description);
         };
     }
 
     private String tokenErrorMessage(String label, String body) {
+        String name = label == null || label.isBlank() ? "Login" : label;
         try {
             JsonNode n = mapper.readTree(body == null ? "{}" : body);
             String err = n.path("error").asText("");
+            String description = n.path("error_description").asText("");
+            if (description.length() > 180) {
+                description = description.substring(0, 180);
+            }
             if ("invalid_client".equals(err) || "unauthorized_client".equals(err)) {
-                return "Google Client ID / Secret galat hain. .env check karo aur server restart karo.";
+                return name + " Client ID ya Secret galat hai. VPS .env check karke server restart karo."
+                        + (description.isBlank() ? "" : " " + description);
             }
             if ("redirect_uri_mismatch".equals(err)) {
-                return "Google redirect URI match nahi hui. Console mein http://localhost:3000/auth/google/callback add karo.";
+                return name + " redirect URI match nahi hui.";
+            }
+            if (!err.isBlank()) {
+                return name + " login failed: " + err + (description.isBlank() ? "" : " — " + description);
             }
         } catch (Exception ignored) {
             // fall through
         }
-        return label + " token exchange failed. Google Console redirect URI check karo.";
+        return name + " token exchange failed. Client ID, secret, and redirect URI check karo.";
     }
 
     private RedirectView authError(String message, String returnTo) {
@@ -593,7 +607,8 @@ public class AuthController {
     }
 
     private static String enc(String s) {
-        return URLEncoder.encode(s == null ? "" : s, StandardCharsets.UTF_8);
+        // Java encodes '~' as %7E. Microsoft secrets often contain '~' and reject the encoded form.
+        return URLEncoder.encode(s == null ? "" : s, StandardCharsets.UTF_8).replace("%7E", "~");
     }
 
     private static String cap(String s) {
